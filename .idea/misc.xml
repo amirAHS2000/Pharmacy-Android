@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/activity_prepare.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_forget_password.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_signup.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_store.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
       </map>
     </option>
   </component>

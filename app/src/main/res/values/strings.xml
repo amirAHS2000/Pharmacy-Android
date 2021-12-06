@@ -4,4 +4,20 @@
     <string name="bottom_navigation_home">Home</string>
     <string name="bottom_navigation_store">Store</string>
     <string name="bottom_navigation_profile">Profile</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_text_btn">login</string>
+    <string name="forget_password_text_btn">forget password</string>
+    <string name="confirm_text_btn">confirm</string>
+    <string name="firstname_text_hint">Firstname</string>
+    <string name="lastname_text_hint">Lastname</string>
+    <string name="sign_up_text_btn">sign up</string>
+
 </resources>
