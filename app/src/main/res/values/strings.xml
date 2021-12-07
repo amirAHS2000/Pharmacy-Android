@@ -19,5 +19,10 @@
     <string name="firstname_text_hint">Firstname</string>
     <string name="lastname_text_hint">Lastname</string>
     <string name="sign_up_text_btn">sign up</string>
-
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign-up</string>
 </resources>

@@ -38,8 +38,12 @@ class LoginFragment : Fragment() {
             (activity as PrepareActivity).navigateToAnotherActivity()
         }
 
-        binding.forgetPasswordButton.setOnClickListener {
+        binding.forgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
+        }
+
+        binding.signUpTexts.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
         return binding.root

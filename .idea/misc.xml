@@ -14,6 +14,13 @@
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_store.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/drawable/shape_rounded_corner.xml" value="0.3315" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/layout/activity_main.xml" value="0.3609375" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/layout/fragment_home.xml" value="0.29628046173578454" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/layout/fragment_profile.xml" value="0.3609375" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/layout/fragment_signup.xml" value="0.5" />
+        <entry key="..\:/Users/amirk/StudioProjects/Pharmacy-Android/app/src/main/res/layout/fragment_store.xml" value="0.3609375" />
       </map>
     </option>
   </component>

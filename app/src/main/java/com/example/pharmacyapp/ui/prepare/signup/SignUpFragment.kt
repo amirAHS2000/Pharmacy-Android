@@ -32,10 +32,10 @@ class SignUpFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-        binding.signupBtn.setOnClickListener {
-            (activity as PrepareActivity).navigateToAnotherActivity()
-        }
+//
+//        binding.signupBtn.setOnClickListener {
+//            (activity as PrepareActivity).navigateToAnotherActivity()
+//        }
 
         return binding.root
     }
