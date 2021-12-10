@@ -25,4 +25,6 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign-up</string>
+    <string name="phone_empty_error">Please Enter Your Phone Number</string>
+    <string name="password_empty_error">Please Enter Your Phone Password</string>
 </resources>
