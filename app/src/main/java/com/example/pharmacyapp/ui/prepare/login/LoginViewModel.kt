@@ -52,9 +52,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
 //            lateinit var res : NetworkUserContainer
             try {
-                PharmacyNetwork.pharmacy.login(phone, password)
-            } catch (e : Exception){
-               Log.e("retrofit", e.stackTraceToString() )
+                val user = PharmacyNetwork.pharmacy.login(phone, password)
+            } catch (e: Exception) {
+                Log.e("retrofit", e.stackTraceToString())
             }
 //            Log.d("pharmacy-login", res.toString())
         }
