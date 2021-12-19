@@ -1,14 +1,9 @@
 package com.example.pharmacyapp.ui.prepare.login
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.pharmacyapp.network.PharmacyNetwork
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -24,7 +19,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val navigateToSignUp: LiveData<Boolean?>
         get() = _navigateToSignUp
 
-    fun onNavigateToMain() {
+    private fun onNavigateToMain() {
         _navigateToMain.value = true
     }
 
@@ -49,14 +44,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onLogin(phone: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-//            lateinit var res : NetworkUserContainer
-            try {
-                val user = PharmacyNetwork.pharmacy.login(phone, password)
-            } catch (e: Exception) {
-                Log.e("retrofit", e.stackTraceToString())
-            }
-//            Log.d("pharmacy-login", res.toString())
-        }
+        //rep.Login => if true login else error
+        onNavigateToMain()
     }
 }
