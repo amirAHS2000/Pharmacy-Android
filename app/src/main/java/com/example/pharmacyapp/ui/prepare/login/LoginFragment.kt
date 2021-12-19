@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentLoginBinding
-import com.example.pharmacyapp.network.PharmacyNetwork
 import com.example.pharmacyapp.ui.prepare.PrepareActivity
 
 class LoginFragment : Fragment() {
@@ -35,6 +34,12 @@ class LoginFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.phoneInputLayout.also { textInput ->
             textInput.editText?.doOnTextChanged { text, _, _, _ ->
@@ -70,15 +75,15 @@ class LoginFragment : Fragment() {
                 val phone = binding.phoneInputLayout.editText?.text.toString()
                 val password = binding.passwordInputLayout.editText?.text.toString()
                 viewModel.onLogin(phone, password)
-//                (activity as PrepareActivity).navigateToAnotherActivity()
             }
         }
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        viewModel.navigateToMain.observe(viewLifecycleOwner) {
+            it?.let {
+                (activity as PrepareActivity).navigateToAnotherActivity()
+                viewModel.onNavigateToMainDone()
+            }
+        }
 
         viewModel.navigateToForgotPassword.observe(viewLifecycleOwner) {
             it?.let {

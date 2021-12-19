@@ -16,15 +16,29 @@
     <string name="login_text_btn">login</string>
     <string name="forget_password_text_btn">forget password</string>
     <string name="confirm_text_btn">confirm</string>
-    <string name="firstname_text_hint">Firstname</string>
-    <string name="lastname_text_hint">Lastname</string>
+    <string name="firstname_text_hint_required">Firstname</string>
+    <string name="lastname_text_hint_required">Lastname</string>
     <string name="sign_up_text_btn">sign up</string>
     <string name="phone_number">Phone Number</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="sign_up">Sign-up</string>
-    <string name="phone_empty_error">Please Enter Your Phone Number</string>
-    <string name="password_empty_error">Please Enter Your Phone Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="phone_empty_error">Enter Your Phone Number</string>
+    <string name="password_empty_error">Enter Your Password</string>
+    <string name="national_number">National Number</string>
+    <string name="insurance_number">Insurance Number</string>
+    <string name="insurance_name">Insurance Name</string>
+    <string name="astrix"><font color='#FF0000'>*</font></string>
+    <string name="confirm">Confirm</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="log_in">Log in</string>
+    <string name="firstname_empty_error">Enter Your First Name</string>
+    <string name="lastname_empty_error">Enter Your Last Name</string>
+    <string name="national_name_empty_error">Enter Your National Number</string>
+    <string name="add_password_empty_error">Enter A Password</string>
+    <string name="confirm_name_empty_error">Enter Your Password Again</string>
+    <string name="password_match_error">Your Passwords Don\'t Match</string>
+    <string name="password_length_error">Password Should Be 8 characters or more</string>
 </resources>
