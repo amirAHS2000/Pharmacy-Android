@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    category dimension size    -->
+    <dimen name="category_list_item_width">120dp</dimen>
+    <dimen name="category_list_item_height">160dp</dimen>
+    <!--  category & top seller & non med image icon dimension  -->
+    <dimen name="category_list_item_image_width">85dp</dimen>
+    <dimen name="category_list_item_image_height">85dp</dimen>
+    <!--  text label size (labels in home page)  -->
+    <dimen name="label_text_size">20sp</dimen>
+    <!--  home page - margins for labels  -->
+    <dimen name="start_margin">10dp</dimen>
+    <!--  padding for header (label and more) in home page  -->
+    <dimen name="header_padding">12dp</dimen>
+    <!--  more option text size  -->
+    <dimen name="more_option_text_size">15sp</dimen>
+    <!--  home page -> recyclerview margin (top & bottom)  -->
+    <dimen name="rv_margin_home">8dp</dimen>
+    <!--  margin between more text and more icon  -->
+    <dimen name="margin_more_ic_txt">2dp</dimen>
+</resources>

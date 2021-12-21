@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.pharmacyapp.ui.prepare.login.LoginFragment"
+        android:name="com.example.pharmacyapp.ui.fragment.prepare.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
-        android:name="com.example.pharmacyapp.ui.prepare.forgetpassword.ForgetPasswordFragment"
+        android:name="com.example.pharmacyapp.ui.fragment.prepare.forgetpassword.ForgetPasswordFragment"
         android:label="ForgetPasswordFragment"
         tools:layout="@layout/fragment_forget_password">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.pharmacyapp.ui.prepare.signup.SignUpFragment"
+        android:name="com.example.pharmacyapp.ui.fragment.prepare.signup.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_signup"/>
 </navigation>

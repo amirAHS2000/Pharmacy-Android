@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet></KeyFrameSet>
+        <OnSwipe
+            motion:touchAnchorId="@+id/user_basic_info"
+            motion:touchAnchorSide="bottom" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/header_background"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/user_basic_info"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="45dp"
+            android:alpha="1.0"
+            motion:layout_constraintBottom_toBottomOf="@+id/header_background"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/header_background" />
+
+        <Constraint
+            android:id="@+id/app_bar"
+            android:layout_width="0dp"
+            android:layout_height="?actionBarSize"
+            android:alpha="1.0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+
+        <Constraint
+            android:id="@+id/user_image_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:alpha="1.0"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toTopOf="@+id/user_basic_info"
+            motion:layout_constraintEnd_toEndOf="@+id/user_basic_info"
+            motion:layout_constraintStart_toStartOf="@+id/user_basic_info"
+            motion:layout_constraintTop_toTopOf="@+id/user_basic_info" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/header_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/user_image_profile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="15dp"
+            android:alpha="1.0"
+            android:elevation="5dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/user_basic_info"
+            motion:layout_constraintStart_toStartOf="@+id/user_basic_info"
+            motion:layout_constraintTop_toTopOf="@+id/user_basic_info" />
+
+        <Constraint
+            android:id="@+id/user_basic_info"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:alpha="1.0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/app_bar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/properties_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/user_basic_info" />
+    </ConstraintSet>
+</MotionScene>

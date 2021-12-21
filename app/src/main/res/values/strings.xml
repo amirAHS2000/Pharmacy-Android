@@ -27,4 +27,11 @@
     <string name="sign_up">Sign-up</string>
     <string name="phone_empty_error">Please Enter Your Phone Number</string>
     <string name="password_empty_error">Please Enter Your Phone Password</string>
+    <string name="category_list_item_description">category list item description</string>
+    <string name="categories_label_text">Categories</string>
+    <string name="top_sellers_label_text">Top Sellers</string>
+    <string name="non_meds_label_text">Non Meds</string>
+    <string name="more_text">more</string>
+    <string name="more_option_icon_description">more option description</string>
+    <string name="user_image_as_profile_image_text">user image as profile image</string>
 </resources>

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.pharmacyapp.ui.prepare.signup.SignUpViewModel" />
+            type="com.example.pharmacyapp.ui.fragment.prepare.signup.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
