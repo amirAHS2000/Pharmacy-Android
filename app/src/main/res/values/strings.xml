@@ -41,4 +41,11 @@
     <string name="confirm_name_empty_error">Enter Your Password Again</string>
     <string name="password_match_error">Your Passwords Don\'t Match</string>
     <string name="password_length_error">Password Should Be 8 characters or more</string>
+    <string name="category_list_item_description_text">category list item description</string>
+    <string name="categories_label_text">Categories</string>
+    <string name="more_text">More</string>
+    <string name="more_option_icon_description">more option icon description</string>
+    <string name="top_sellers_text_label">Top Sellers</string>
+    <string name="non_meds_text_label">Non Meds</string>
+    <string name="medicine_list_item_description">medicine list item description</string>
 </resources>

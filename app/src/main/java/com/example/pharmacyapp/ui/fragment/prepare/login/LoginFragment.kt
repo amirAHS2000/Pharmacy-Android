@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentLoginBinding
+import com.example.pharmacyapp.ui.fragment.prepare.PrepareActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,8 +69,7 @@ class LoginFragment : Fragment() {
             if (isNotEmpty) {
                 val phone = binding.phoneInputLayout.editText?.text.toString()
                 val password = binding.passwordInputLayout.editText?.text.toString()
-//                viewModel.onLogin(phone, password)
-//                (activity as PrepareActivity).navigateToAnotherActivity()
+                viewModel.onLogin(phone, password)
             }
         }
 
@@ -78,6 +78,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.navigateToMain.observe(viewLifecycleOwner) {
+            it?.let {
+                (activity as PrepareActivity).navigateToAnotherActivity()
+                viewModel.onNavigateToMainDone()
+            }
+        }
 
         viewModel.navigateToForgotPassword.observe(viewLifecycleOwner) {
             it?.let {

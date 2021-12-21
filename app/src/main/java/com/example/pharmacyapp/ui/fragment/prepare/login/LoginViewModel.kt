@@ -1,15 +1,11 @@
 package com.example.pharmacyapp.ui.fragment.prepare.login
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +26,7 @@ class LoginViewModel @Inject constructor(
     val navigateToSignUp: LiveData<Boolean?>
         get() = _navigateToSignUp
 
-    fun onNavigateToMain() {
+    private fun onNavigateToMain() {
         _navigateToMain.value = true
     }
 
@@ -54,15 +50,8 @@ class LoginViewModel @Inject constructor(
         _navigateToSignUp.value = null
     }
 
-//    fun onLogin(phone: String, password: String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-////            lateinit var res : NetworkUserContainer
-//            try {
-//                val user = PharmacyNetwork.pharmacy.login(phone, password)
-//            } catch (e: Exception) {
-//                Log.e("retrofit", e.stackTraceToString())
-//            }
-////            Log.d("pharmacy-login", res.toString())
-//        }
-//    }
+    fun onLogin(phone: String, password: String) {
+        //rep.Login => if true login else error
+        onNavigateToMain()
+    }
 }

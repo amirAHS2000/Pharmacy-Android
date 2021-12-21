@@ -31,7 +31,7 @@
                 android:layout_width="@dimen/category_list_item_image_width"
                 android:layout_height="@dimen/category_list_item_image_height"
                 android:layout_marginTop="5dp"
-                android:contentDescription="@string/category_list_item_description"
+                android:contentDescription="@string/category_list_item_description_text"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintBottom_toTopOf="@+id/materialTextView"
                 app:layout_constraintEnd_toEndOf="parent"
