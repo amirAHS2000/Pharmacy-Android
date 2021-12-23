@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: Repository,
-    application: Application
+    application: Application,
 ) : AndroidViewModel(application) {
 
     var medsResponse: MutableLiveData<NetworkResult<List<Medicine>>> = MutableLiveData()

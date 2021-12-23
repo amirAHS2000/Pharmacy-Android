@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class Repository @Inject constructor(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
 ) {
-    fun findUserByPhone(phone: String) : Boolean{
+    fun findUserByPhone(phone: String): Boolean {
 //        remoteDataSource.findUserByPhone()
         return true // TODO implement this
     }

@@ -11,7 +11,7 @@ interface PharmacyApi {
     @POST("api/login")
     suspend fun login(
         @Query("phone") phone: String,
-        @Query("password") password: String
+        @Query("password") password: String,
     ): Response<LoginResponse>
 
     @POST("api/signUp")
@@ -20,14 +20,14 @@ interface PharmacyApi {
         @Query("lastname") lastname: String,
         @Query("nationalNumber") nationalNumber: String,
         @Query("phoneNumber") phoneNumber: String,
-        @Query("password") password: String
+        @Query("password") password: String,
     ): Response<UserAndToken>
     // TODO: 12/21/2021 change signUp return type (create a model for sign-up)
 
     //get category and medicine (home)
     @GET("api/")
     suspend fun getMedicine(
-        @Query("medName") medicineName: String
+        @Query("medName") medicineName: String,
     ): Response<List<Medicine>>
 
     @GET("api/")

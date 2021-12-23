@@ -11,11 +11,11 @@ import com.example.pharmacyapp.model.Category
 class CategoryAdapter(private val clickListener: CategoryListener) :
     ListAdapter<Category, CategoryAdapter.ViewHolder>(CategoryDiffCallback()) {
     class ViewHolder private constructor(
-        private val binding: CategoryListItemBinding
+        private val binding: CategoryListItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
             result: Category?,
-            clickListener: CategoryListener
+            clickListener: CategoryListener,
         ) {
             binding.category = result
             binding.clickListener = clickListener

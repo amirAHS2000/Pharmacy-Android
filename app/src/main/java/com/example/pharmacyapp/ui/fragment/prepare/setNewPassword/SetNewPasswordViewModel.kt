@@ -10,6 +10,4 @@ import javax.inject.Inject
 class SetNewPasswordViewModel @Inject constructor(
     val repository: Repository,
     application: Application,
-) : AndroidViewModel(application) {
-
-}
+) : AndroidViewModel(application)

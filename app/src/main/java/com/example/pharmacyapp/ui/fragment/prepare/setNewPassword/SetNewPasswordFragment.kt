@@ -1,12 +1,12 @@
 package com.example.pharmacyapp.ui.fragment.prepare.setNewPassword
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.SetNewPasswordFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +28,8 @@ class SetNewPasswordFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.set_new_password_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.set_new_password_fragment, container, false)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

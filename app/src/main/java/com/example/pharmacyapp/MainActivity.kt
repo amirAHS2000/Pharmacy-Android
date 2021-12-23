@@ -1,11 +1,11 @@
 package com.example.pharmacyapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.pharmacyapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.pharmacyapp.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

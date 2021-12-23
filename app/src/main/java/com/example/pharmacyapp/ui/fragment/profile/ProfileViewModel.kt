@@ -9,8 +9,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     val repository: Repository,
-    application: Application
+    application: Application,
 ) :
-    AndroidViewModel(application) {
-
-}
+    AndroidViewModel(application)

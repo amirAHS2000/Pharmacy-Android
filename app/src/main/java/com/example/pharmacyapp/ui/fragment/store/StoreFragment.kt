@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentStoreBinding
-import com.example.pharmacyapp.ui.fragment.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +25,7 @@ class StoreFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_store, container, false)

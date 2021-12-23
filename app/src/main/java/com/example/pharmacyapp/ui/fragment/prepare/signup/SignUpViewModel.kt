@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     val repository: Repository,
-    application: Application
+    application: Application,
 ) :
     AndroidViewModel(application) {
 
@@ -44,7 +44,7 @@ class SignUpViewModel @Inject constructor(
         lastname: String,
         nationalNumber: String,
         phone: String,
-        password: String
+        password: String,
     ) {
         // create a user and navigate if it was successful
         onNavigateToMain()

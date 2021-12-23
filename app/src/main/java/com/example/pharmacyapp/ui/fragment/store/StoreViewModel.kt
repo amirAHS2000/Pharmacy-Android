@@ -9,6 +9,5 @@ import javax.inject.Inject
 @HiltViewModel
 class StoreViewModel @Inject constructor(
     val repository: Repository,
-    application: Application
-) : AndroidViewModel(application) {
-}
+    application: Application,
+) : AndroidViewModel(application)

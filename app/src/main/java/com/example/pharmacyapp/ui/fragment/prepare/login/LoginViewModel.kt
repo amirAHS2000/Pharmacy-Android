@@ -11,14 +11,13 @@ import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.handle
 import com.example.pharmacyapp.util.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     val repository: Repository,
-    application: Application
+    application: Application,
 ) : AndroidViewModel(application) {
 
     private var _navigateToMain = MutableLiveData<Boolean?>()
@@ -67,9 +66,9 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loginSafeCall(phone: String, password: String){
+    private suspend fun loginSafeCall(phone: String, password: String) {
         _loginResponse.value = NetworkResult.Loading()
-        if (hasInternetConnection(getApplication())){
+        if (hasInternetConnection(getApplication())) {
             try {
                 val response = repository.login(phone, password)
                 _loginResponse.value = response.handle()

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class PrepareViewModelFactory(
-    private val application: Application
+    private val application: Application,
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

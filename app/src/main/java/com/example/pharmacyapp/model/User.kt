@@ -6,5 +6,5 @@ data class User(
     val name: String,
     val phone: String?,
     val phone_verified_at: Any?,
-    val updated_at: Any?
+    val updated_at: Any?,
 )

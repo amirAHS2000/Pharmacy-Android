@@ -6,7 +6,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
-    private val pharmacyApi: PharmacyApi
+    private val pharmacyApi: PharmacyApi,
 ) {
     suspend fun login(phoneNumber: String, password: String): Response<LoginResponse> {
         return pharmacyApi.login(phoneNumber, password)
@@ -17,7 +17,7 @@ class RemoteDataSource @Inject constructor(
         lastname: String,
         nationalNumber: String,
         phoneNumber: String,
-        password: String
+        password: String,
     ): Response<UserAndToken> {
         return pharmacyApi.signUp(firstname, lastname, nationalNumber, phoneNumber, password)
     }
