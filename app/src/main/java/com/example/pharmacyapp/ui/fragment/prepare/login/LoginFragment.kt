@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentLoginBinding
 import com.example.pharmacyapp.ui.fragment.prepare.PrepareActivity
+import com.example.pharmacyapp.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +30,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
@@ -101,11 +102,29 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.loginResponse.observe(viewLifecycleOwner) {
-            it?.let { response ->
-                if (response.status){
-                    viewModel.onNavigateToMain()
-                } else {
-                    Log.d("login", response.message.toString())
+            it?.let { networkResult ->
+                when (networkResult) {
+                    is NetworkResult.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.loginErrorTextView.visibility = View.GONE
+                    }
+                    is NetworkResult.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        binding.loginErrorTextView.visibility = View.VISIBLE
+                        binding.loginErrorTextView.text = networkResult.message
+                    }
+                    is NetworkResult.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        if (networkResult.data?.status == true) {
+                            binding.loginErrorTextView.visibility = View.GONE
+                            viewModel.onNavigateToMain()
+                        } else {
+                            binding.loginErrorTextView.visibility = View.VISIBLE
+                            Log.v("server login error", networkResult.data?.message.toString())
+                            binding.loginErrorTextView.text =
+                                getString(R.string.login_credential_error)
+                        }
+                    }
                 }
             }
         }

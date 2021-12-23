@@ -143,6 +143,30 @@
                 app:layout_constraintBottom_toTopOf="@+id/phoneInputLayout"
                 app:layout_constraintStart_toStartOf="@+id/phoneInputLayout" />
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/loginButton"
+                app:layout_constraintEnd_toEndOf="@+id/loginButton"
+                app:layout_constraintStart_toStartOf="@+id/loginButton" />
+
+            <TextView
+                android:id="@+id/loginErrorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:text="Error"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintBottom_toTopOf="@+id/loginButton"
+                app:layout_constraintEnd_toEndOf="@+id/loginButton"
+                app:layout_constraintStart_toStartOf="@+id/loginButton"
+                tools:visibility="visible" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

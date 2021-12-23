@@ -4,9 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
 import com.example.pharmacyapp.model.LoginResponse
+import com.example.pharmacyapp.util.NetworkResult
+import com.example.pharmacyapp.util.handle
+import com.example.pharmacyapp.util.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,8 +33,8 @@ class LoginViewModel @Inject constructor(
     val navigateToSignUp: LiveData<Boolean?>
         get() = _navigateToSignUp
 
-    private var _loginResponse = MutableLiveData<LoginResponse?>()
-    val loginResponse: LiveData<LoginResponse?>
+    private var _loginResponse = MutableLiveData<NetworkResult<LoginResponse>>()
+    val loginResponse: LiveData<NetworkResult<LoginResponse>>
         get() = _loginResponse
 
     fun onNavigateToMain() {
@@ -56,9 +62,22 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onLogin(phone: String, password: String) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            _loginResponse.value = repository.login(phone, password)
-//        }
-        onNavigateToMain()
+        viewModelScope.launch {
+            loginSafeCall(phone, password)
+        }
+    }
+
+    private suspend fun loginSafeCall(phone: String, password: String){
+        _loginResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())){
+            try {
+                val response = repository.login(phone, password)
+                _loginResponse.value = response.handle()
+            } catch (e: Exception) {
+                _loginResponse.value = NetworkResult.Error("There Was Something Wrong")
+            }
+        } else {
+            _loginResponse.value = NetworkResult.Error("No Internet Connection")
+        }
     }
 }
