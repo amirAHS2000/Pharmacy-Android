@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +27,7 @@ class ForgetPasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         binding =
@@ -35,10 +36,45 @@ class ForgetPasswordFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.confirmButton.setOnClickListener {
-            findNavController().navigate(R.id.action_forgetPasswordFragment_to_loginFragment)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.phoneInputLayoutForgotPassword.apply {
+            editText?.doOnTextChanged { text, _, _, _ ->
+                if (text?.isEmpty() != true && error == getString(R.string.phone_empty_error)) {
+                    isErrorEnabled = false
+                    error = ""
+                }
+            }
         }
 
-        return binding.root
+        binding.confirmButton.setOnClickListener {
+            binding.phoneInputLayoutForgotPassword.apply {
+                if (editText?.text?.isEmpty() == true) {
+                    isErrorEnabled = true
+                    error = getString(R.string.phone_empty_error)
+                } else {
+                    val phone = editText!!.text.toString()
+                    val user = viewModel.onFindUser(phone)
+                    if (user) {
+                        viewModel.onNavigateToSetNewPassword()
+                    } else {
+                        isErrorEnabled = true
+                        error = getString(R.string.no_user_founded)
+                    }
+                }
+            }
+        }
+
+        viewModel.navigateToSetNewPassword.observe(viewLifecycleOwner) {
+            it?.let {
+                //findNavController().navigate(R.id.action_forgetPasswordFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_forgetPasswordFragment_to_setNewPasswordFragment)
+                viewModel.onNavigateToSetNewPasswordDone()
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.pharmacyapp.ui.fragment.prepare.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -96,6 +97,16 @@ class LoginFragment : Fragment() {
             it?.let {
                 findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
                 viewModel.onNavigateToSignUpDone()
+            }
+        }
+
+        viewModel.loginResponse.observe(viewLifecycleOwner) {
+            it?.let { response ->
+                if (response.status){
+                    viewModel.onNavigateToMain()
+                } else {
+                    Log.d("login", response.message.toString())
+                }
             }
         }
     }

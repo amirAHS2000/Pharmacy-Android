@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.util.NetworkResult
+import com.example.pharmacyapp.util.handle
+import com.example.pharmacyapp.util.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -29,10 +31,10 @@ class HomeViewModel @Inject constructor(
 
     private suspend fun getMedicineSafeCall(medName: String) {
         medsResponse.value = NetworkResult.Loading()
-        if (hasInternetConnection()) {
+        if (hasInternetConnection(getApplication())) {
             try {
                 val response = repository.remote.getMedicine(medName)
-                medsResponse.value = handleMedicineResponse(response)
+                medsResponse.value = response.handle()
             } catch (e: Exception) {
                 medsResponse.value = NetworkResult.Error("Medicine Not Found.")
             }
@@ -41,40 +43,39 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun handleMedicineResponse(response: Response<List<Medicine>>): NetworkResult<List<Medicine>>? {
-        when {
-            response.message().toString().contains("timeout") -> {
-                return NetworkResult.Error("Timeout.")
-            }
-            response.code() == 402 -> {
-                return NetworkResult.Error("API Key Limited.")
-            }
-            // TODO: 12/19/2021 must change this part (according to Medicine model)
-            response.body()!!.isNullOrEmpty() -> {
-                return NetworkResult.Error("Medicine Not Found.")
-            }
-            response.isSuccessful -> {
-                val medicine = response.body()
-                return NetworkResult.Success(medicine!!)
-            }
-            else -> {
-                return NetworkResult.Error(response.message())
-            }
-        }
-    }
-
-    private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication<Application>().getSystemService(
-            Context.CONNECTIVITY_SERVICE
-        ) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
-
-        return when {
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-            else -> false
-        }
-    }
+//    private fun handleMedicineResponse(response: Response<List<Medicine>>): NetworkResult<List<Medicine>>? {
+//        when {
+//            response.message().toString().contains("timeout") -> {
+//                return NetworkResult.Error("Timeout.")
+//            }
+//            response.code() == 402 -> {
+//                return NetworkResult.Error("API Key Limited.")
+//            }
+//            // TODO: 12/19/2021 must change this part (according to Medicine model)
+//            response.body()!!.isNullOrEmpty() -> {
+//                return NetworkResult.Error("Medicine Not Found.")
+//            }
+//            response.isSuccessful -> {
+//                return NetworkResult.Success(response.body()!!)
+//            }
+//            else -> {
+//                return NetworkResult.Error(response.message())
+//            }
+//        }
+//    }
+//
+//    private fun hasInternetConnection(): Boolean {
+//        val connectivityManager = getApplication<Application>().getSystemService(
+//            Context.CONNECTIVITY_SERVICE
+//        ) as ConnectivityManager
+//        val activeNetwork = connectivityManager.activeNetwork ?: return false
+//        val capabilities = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+//
+//        return when {
+//            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+//            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+//            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+//            else -> false
+//        }
+//    }
 }

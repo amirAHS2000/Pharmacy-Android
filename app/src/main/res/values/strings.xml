@@ -49,4 +49,7 @@
     <string name="non_meds_text_label">Non Meds</string>
     <string name="medicine_list_item_description">medicine list item description</string>
     <string name="search_text">Search</string>
+    <string name="no_user_founded">No User With This Phone Number Founded</string>
+    <string name="set_new_password">Set New Password</string>
+    <string name="new_password">New Password</string>
 </resources>

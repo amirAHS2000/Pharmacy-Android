@@ -4,8 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
+import com.example.pharmacyapp.network.models.LoginResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +30,11 @@ class LoginViewModel @Inject constructor(
     val navigateToSignUp: LiveData<Boolean?>
         get() = _navigateToSignUp
 
-    private fun onNavigateToMain() {
+    private var _loginResponse = MutableLiveData<LoginResponse?>()
+    val loginResponse: LiveData<LoginResponse?>
+        get() = _loginResponse
+
+    fun onNavigateToMain() {
         _navigateToMain.value = true
     }
 
@@ -51,7 +59,9 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onLogin(phone: String, password: String) {
-        //rep.Login => if true login else error
+//        viewModelScope.launch(Dispatchers.IO) {
+//            _loginResponse.value = repository.login(phone, password)
+//        }
         onNavigateToMain()
     }
 }

@@ -3,6 +3,7 @@ package com.example.pharmacyapp.data.network
 import com.example.pharmacyapp.model.Category
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.model.User
+import com.example.pharmacyapp.network.models.LoginResponse
 import com.example.pharmacyapp.network.models.UserAndToken
 import retrofit2.Response
 import retrofit2.http.GET
@@ -15,7 +16,7 @@ interface PharmacyApi {
     suspend fun login(
         @Query("phone") phone: String,
         @Query("password") password: String
-    ): Response<UserAndToken>
+    ): Response<LoginResponse>
 
     @POST("api/signUp")
     suspend fun signUp(

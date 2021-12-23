@@ -1,9 +1,10 @@
 package com.example.pharmacyapp.data
 
+import com.example.pharmacyapp.data.network.PharmacyApi
 import com.example.pharmacyapp.model.Category
 import com.example.pharmacyapp.model.Medicine
-import com.example.pharmacyapp.data.network.PharmacyApi
 import com.example.pharmacyapp.model.User
+import com.example.pharmacyapp.network.models.LoginResponse
 import com.example.pharmacyapp.network.models.UserAndToken
 import retrofit2.Response
 import javax.inject.Inject
@@ -11,8 +12,7 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(
     private val pharmacyApi: PharmacyApi
 ) {
-    //login and sign-up
-    suspend fun login(phoneNumber: String, password: String): Response<UserAndToken> {
+    suspend fun login(phoneNumber: String, password: String): Response<LoginResponse> {
         return pharmacyApi.login(phoneNumber, password)
     }
 
