@@ -1,6 +1,6 @@
 package com.example.pharmacyapp.data
 
-import com.example.pharmacyapp.network.models.LoginResponse
+import com.example.pharmacyapp.model.LoginResponse
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.example.pharmacyapp.network.models
+package com.example.pharmacyapp.model
 
 data class UserAndToken(
     val token: String,
