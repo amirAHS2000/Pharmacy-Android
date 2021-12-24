@@ -18,6 +18,35 @@ class Repository @Inject constructor(
         return remoteDataSource.login(phone, password)
     }
 
+    suspend fun signUp(
+        firstName: String,
+        lastName: String,
+        nationalNumber: String,
+        phone: String,
+        password: String,
+        insuranceNumber: String? = null,
+        insuranceId: Int? = null,
+    ): Response<LoginResponse> {
+        val patient = remoteDataSource.createPatient(firstName,
+            lastName,
+            nationalNumber,
+            phone,
+            insuranceNumber,
+            insuranceId)
+        return when {
+            !patient.isSuccessful -> Response.error(patient.code(), patient.errorBody()!!)
+
+            patient.body()?.status == false -> Response.success(LoginResponse(status = false,
+                message = patient.body()!!.message))
+
+            else -> {
+                val refId = patient.body()?.result?.first()?.patient?.id!!
+                remoteDataSource.signUp(refId, nationalNumber, phone, password, "patient")
+            }
+        }
+
+    }
+
     val remote = remoteDataSource // TODO remove this
 
 

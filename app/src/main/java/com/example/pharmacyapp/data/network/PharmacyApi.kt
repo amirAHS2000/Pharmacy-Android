@@ -14,14 +14,14 @@ interface PharmacyApi {
         @Query("password") password: String,
     ): Response<LoginResponse>
 
-    @POST("api/signUp")
+    @POST("api/register")
     suspend fun signUp(
-        @Query("firstname") firstname: String,
-        @Query("lastname") lastname: String,
-        @Query("nationalNumber") nationalNumber: String,
-        @Query("phoneNumber") phoneNumber: String,
+        @Query("ref_id") ref_id: Int,
+        @Query("phone") phone: String,
+        @Query("nat_num") nationalNumber: String,
         @Query("password") password: String,
-    ): Response<UserAndToken>
+        @Query("type") type: String,
+    ): Response<LoginResponse>
     // TODO: 12/21/2021 change signUp return type (create a model for sign-up)
 
     //get category and medicine (home)
@@ -36,4 +36,14 @@ interface PharmacyApi {
     //get user information (profile)
     @GET("api/")
     suspend fun getUserInfo(): Response<User>
+
+    @POST("api/register/patient")
+    suspend fun createPatient(
+        @Query("first_name") firstName: String,
+        @Query("last_name") lastName: String,
+        @Query("nat_num") nationalNumber: String,
+        @Query("phone") phone: String,
+        @Query("ins_num") insuranceNumber: String?,
+        @Query("ins_id") insuranceId: Int?,
+    ): Response<CreatePatientResponse>
 }

@@ -70,8 +70,7 @@ class LoginViewModel @Inject constructor(
         _loginResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.login(phone, password)
-                _loginResponse.value = response.handle()
+                _loginResponse.value = repository.login(phone, password).handle()
             } catch (e: Exception) {
                 _loginResponse.value = NetworkResult.Error("There Was Something Wrong")
             }

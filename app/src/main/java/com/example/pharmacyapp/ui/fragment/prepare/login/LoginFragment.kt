@@ -105,16 +105,16 @@ class LoginFragment : Fragment() {
             it?.let { networkResult ->
                 when (networkResult) {
                     is NetworkResult.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
+                        binding.loginProgressBar.visibility = View.VISIBLE
                         binding.loginErrorTextView.visibility = View.GONE
                     }
                     is NetworkResult.Error -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.loginProgressBar.visibility = View.GONE
                         binding.loginErrorTextView.visibility = View.VISIBLE
                         binding.loginErrorTextView.text = networkResult.message
                     }
                     is NetworkResult.Success -> {
-                        binding.progressBar.visibility = View.GONE
+                        binding.loginProgressBar.visibility = View.GONE
                         if (networkResult.data?.status == true) {
                             binding.loginErrorTextView.visibility = View.GONE
                             viewModel.onNavigateToMain()

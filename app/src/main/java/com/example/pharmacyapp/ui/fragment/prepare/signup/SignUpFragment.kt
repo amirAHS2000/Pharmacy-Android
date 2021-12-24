@@ -1,6 +1,7 @@
 package com.example.pharmacyapp.ui.fragment.prepare.signup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentSignupBinding
 import com.example.pharmacyapp.ui.fragment.prepare.PrepareActivity
+import com.example.pharmacyapp.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +30,7 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_signup, container, false)
 
@@ -128,6 +130,34 @@ class SignUpFragment : Fragment() {
                 val phone = binding.phoneNumberInputLayout.editText?.text.toString()
                 val password = binding.passwordInputLayoutSignUp.editText?.text.toString()
                 viewModel.onSignUp(firstname, lastname, nationalNumber, phone, password)
+            }
+        }
+
+        viewModel.signUpResponse.observe(viewLifecycleOwner) {
+            it?.let { response ->
+                when (response) {
+                    is NetworkResult.Loading -> {
+                        binding.signUpProgressBar.visibility = View.VISIBLE
+                        binding.signUpErrorTextView.visibility = View.GONE
+                    }
+                    is NetworkResult.Error -> {
+                        binding.signUpProgressBar.visibility = View.GONE
+                        binding.signUpErrorTextView.visibility = View.VISIBLE
+                        binding.signUpErrorTextView.text = response.message
+                    }
+                    is NetworkResult.Success -> {
+                        binding.signUpProgressBar.visibility = View.GONE
+                        if (response.data?.status == true) {
+                            binding.signUpErrorTextView.visibility = View.GONE
+                            viewModel.onNavigateToMain()
+                        } else {
+                            binding.signUpErrorTextView.visibility = View.VISIBLE
+                            Log.v("server login error", response.data?.message.toString())
+                            binding.signUpErrorTextView.text =
+                                getString(R.string.login_credential_error)
+                        }
+                    }
+                }
             }
         }
 

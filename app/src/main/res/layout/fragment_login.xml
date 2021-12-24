@@ -144,12 +144,12 @@
                 app:layout_constraintStart_toStartOf="@+id/phoneInputLayout" />
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/loginProgressBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/loginButton"
                 app:layout_constraintEnd_toEndOf="@+id/loginButton"

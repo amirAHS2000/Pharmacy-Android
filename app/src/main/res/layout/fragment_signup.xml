@@ -17,7 +17,6 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:backgroundTintMode="multiply"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -93,9 +92,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:background="@android:color/transparent"
-                    android:hint="@string/national_number" />
+                    android:hint="@string/national_number"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -118,9 +117,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
                     android:background="@android:color/transparent"
-                    android:hint="@string/phone_number" />
+                    android:hint="@string/phone_number"
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -144,9 +143,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
                     android:background="@android:color/transparent"
-                    android:hint="@string/password" />
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -170,9 +169,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
                     android:background="@android:color/transparent"
-                    android:hint="@string/confirm" />
+                    android:hint="@string/confirm"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -196,11 +195,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:onClick="@{() -> viewModel.onNavigateToLogin()}"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:minHeight="48dp"
+                android:onClick="@{() -> viewModel.onNavigateToLogin()}"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -218,6 +217,30 @@
                     android:text="@string/log_in"
                     android:textColor="?colorPrimary" />
             </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/signUpProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+                app:layout_constraintEnd_toEndOf="@+id/signUpButton"
+                app:layout_constraintStart_toStartOf="@+id/signUpButton" />
+
+            <TextView
+                android:id="@+id/signUpErrorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_light"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+                app:layout_constraintEnd_toEndOf="@+id/signUpButton"
+                app:layout_constraintStart_toStartOf="@+id/signUpButton"
+                tools:text="Error"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

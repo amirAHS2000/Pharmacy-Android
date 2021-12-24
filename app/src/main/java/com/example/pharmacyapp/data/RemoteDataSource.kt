@@ -13,13 +13,29 @@ class RemoteDataSource @Inject constructor(
     }
 
     suspend fun signUp(
-        firstname: String,
-        lastname: String,
+        ref_id: Int,
         nationalNumber: String,
-        phoneNumber: String,
+        phone: String,
         password: String,
-    ): Response<UserAndToken> {
-        return pharmacyApi.signUp(firstname, lastname, nationalNumber, phoneNumber, password)
+        type: String,
+    ): Response<LoginResponse> {
+        return pharmacyApi.signUp(ref_id, phone, nationalNumber, password, type)
+    }
+
+    suspend fun createPatient(
+        firstName: String,
+        lastName: String,
+        nationalNumber: String,
+        phone: String,
+        insuranceNumber: String?,
+        insuranceId: Int?,
+    ): Response<CreatePatientResponse> {
+        return pharmacyApi.createPatient(firstName,
+            lastName,
+            nationalNumber,
+            phone,
+            insuranceNumber,
+            insuranceId)
     }
 
     //get data like medicines - categories
