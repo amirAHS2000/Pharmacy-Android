@@ -18,4 +18,9 @@
     <dimen name="rv_margin_home">8dp</dimen>
     <!--  margin between more text and more icon  -->
     <dimen name="margin_more_ic_txt">2dp</dimen>
+    <!--  home items (height)  -->
+    <dimen name="home_item_height">200dp</dimen>
+    <!--  home item margin (end & start)  -->
+    <dimen name="home_item_margin">14dp</dimen>
+    <dimen name="home_item_margin_between">5dp</dimen>
 </resources>
