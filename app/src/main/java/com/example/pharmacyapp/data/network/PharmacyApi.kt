@@ -22,7 +22,6 @@ interface PharmacyApi {
         @Query("password") password: String,
         @Query("type") type: String,
     ): Response<LoginResponse>
-    // TODO: 12/21/2021 change signUp return type (create a model for sign-up)
 
     //get category and medicine (home)
     @GET("api/")
@@ -36,6 +35,11 @@ interface PharmacyApi {
     //get user information (profile)
     @GET("api/")
     suspend fun getUserInfo(): Response<User>
+
+    @POST("api/user/find")
+    suspend fun getUserInfoByPhone(
+        @Query("phone") phone: String
+    ): Response<UserResponse>
 
     @POST("api/register/patient")
     suspend fun createPatient(

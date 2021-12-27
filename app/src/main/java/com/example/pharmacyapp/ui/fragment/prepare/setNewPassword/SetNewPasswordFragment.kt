@@ -26,7 +26,7 @@ class SetNewPasswordFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.set_new_password_fragment, container, false)
@@ -34,8 +34,9 @@ class SetNewPasswordFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-
-        return inflater.inflate(R.layout.set_new_password_fragment, container, false)
+        return binding.root
     }
+
+
 
 }

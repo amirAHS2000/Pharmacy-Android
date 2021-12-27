@@ -1,6 +1,7 @@
 package com.example.pharmacyapp.data
 
 import com.example.pharmacyapp.model.LoginResponse
+import com.example.pharmacyapp.model.UserResponse
 import dagger.hilt.android.scopes.ViewModelScoped
 import retrofit2.Response
 import javax.inject.Inject
@@ -9,9 +10,8 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
 ) {
-    fun findUserByPhone(phone: String): Boolean {
-//        remoteDataSource.findUserByPhone()
-        return true // TODO implement this
+    suspend fun findUserByPhone(phone: String): Response<UserResponse> {
+        return remoteDataSource.findUserByPhone(phone)
     }
 
     suspend fun login(phone: String, password: String): Response<LoginResponse> {
