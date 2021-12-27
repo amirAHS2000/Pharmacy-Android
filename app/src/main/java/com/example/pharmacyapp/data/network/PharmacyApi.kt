@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface PharmacyApi {
     //sign-up and login (prepare)
-    @POST("api/login")
+    @POST("api/login/patient")
     suspend fun login(
         @Query("phone") phone: String,
         @Query("password") password: String,
