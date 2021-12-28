@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -35,7 +34,7 @@ class ForgetPasswordFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_forget_password, container, false)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         return binding.root
@@ -43,15 +42,6 @@ class ForgetPasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.phoneInputLayoutForgotPassword.apply {
-            editText?.doOnTextChanged { text, _, _, _ ->
-                if (text?.isEmpty() != true && error == getString(R.string.phone_empty_error)) {
-                    isErrorEnabled = false
-                    error = ""
-                }
-            }
-        }
 
         binding.confirmButton.setOnClickListener {
             binding.phoneInputLayoutForgotPassword.apply {
@@ -90,6 +80,8 @@ class ForgetPasswordFragment : Fragment() {
                     }
                 }
             }
+//            binding.forgetPasswordProgressBar.visibility = View.GONE
+//            binding.forgetPasswordErrorTextView.visibility = View.GONE
         }
 
         viewModel.navigateToSetNewPassword.observe(viewLifecycleOwner) {

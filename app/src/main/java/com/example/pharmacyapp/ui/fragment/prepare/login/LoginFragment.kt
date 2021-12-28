@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.phoneInputLayout.also { textInput ->

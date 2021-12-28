@@ -24,8 +24,8 @@ class ForgetPasswordViewModel @Inject constructor(
     val navigateToSetNewPassword: LiveData<Boolean?>
         get() = _navigateToSetNewPassword
 
-    private var _user = MutableLiveData<NetworkResult<UserResponse>>()
-    val user: LiveData<NetworkResult<UserResponse>>
+    private var _user = MutableLiveData<NetworkResult<UserResponse>?>()
+    val user: LiveData<NetworkResult<UserResponse>?>
         get() = _user
 
     fun onNavigateToSetNewPassword() {
@@ -34,20 +34,26 @@ class ForgetPasswordViewModel @Inject constructor(
 
     fun onNavigateToSetNewPasswordDone() {
         _navigateToSetNewPassword.value = null
+        _user.value = null
     }
 
     fun onFindUser(phone: String) {
         viewModelScope.launch {
-            _user.value = NetworkResult.Loading()
-            if (hasInternetConnection(getApplication())) {
-                try {
-                    _user.value = repository.findUserByPhone(phone).handle()
-                } catch (e: Exception) {
-                    _user.value = NetworkResult.Error("There Was Something Wrong")
-                }
-            } else {
-                _user.value = NetworkResult.Error("No Internet Connection")
+            safecall(phone)
+        }
+    }
+
+    private suspend fun safecall(phone: String) {
+        _user.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                _user.value = repository.findUserByPhone(phone).handle()
+                _user.value = NetworkResult.Error("e")
+            } catch (e: Exception) {
+                _user.value = NetworkResult.Error("There Was Something Wrong")
             }
+        } else {
+            _user.value = NetworkResult.Error("No Internet Connection")
         }
     }
 }

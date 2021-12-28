@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.SetNewPasswordFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,12 +32,13 @@ class SetNewPasswordFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.set_new_password_fragment, container, false)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        binding.button.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         return binding.root
     }
-
-
-
 }
