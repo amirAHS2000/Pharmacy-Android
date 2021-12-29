@@ -79,9 +79,10 @@ class ForgetPasswordFragment : Fragment() {
                         }
                     }
                 }
+                return@observe
             }
-//            binding.forgetPasswordProgressBar.visibility = View.GONE
-//            binding.forgetPasswordErrorTextView.visibility = View.GONE
+            binding.forgetPasswordProgressBar.visibility = View.GONE
+            binding.forgetPasswordErrorTextView.visibility = View.GONE
         }
 
         viewModel.navigateToSetNewPassword.observe(viewLifecycleOwner) {

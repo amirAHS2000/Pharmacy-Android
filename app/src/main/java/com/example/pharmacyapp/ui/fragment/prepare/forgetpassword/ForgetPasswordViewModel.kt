@@ -48,7 +48,6 @@ class ForgetPasswordViewModel @Inject constructor(
         if (hasInternetConnection(getApplication())) {
             try {
                 _user.value = repository.findUserByPhone(phone).handle()
-                _user.value = NetworkResult.Error("e")
             } catch (e: Exception) {
                 _user.value = NetworkResult.Error("There Was Something Wrong")
             }
