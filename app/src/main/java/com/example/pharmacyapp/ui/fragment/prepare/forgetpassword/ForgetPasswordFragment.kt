@@ -71,7 +71,7 @@ class ForgetPasswordFragment : Fragment() {
                         binding.forgetPasswordProgressBar.visibility = View.GONE
                         if (result.data?.status == true) {
                             binding.forgetPasswordErrorTextView.visibility = View.GONE
-                            viewModel.onNavigateToSetNewPassword()
+                            viewModel.onNavigateToSetNewPassword(result.data.result.first())
                         } else {
                             binding.forgetPasswordErrorTextView.visibility = View.VISIBLE
                             Log.v("server ForgetPassword error", result.data?.message.toString())
@@ -86,8 +86,9 @@ class ForgetPasswordFragment : Fragment() {
         }
 
         viewModel.navigateToSetNewPassword.observe(viewLifecycleOwner) {
-            it?.let {
-                findNavController().navigate(R.id.action_forgetPasswordFragment_to_setNewPasswordFragment)
+            it?.let { user ->
+                val action = ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToSetNewPasswordFragment(user)
+                findNavController().navigate(action)
                 viewModel.onNavigateToSetNewPasswordDone()
             }
         }

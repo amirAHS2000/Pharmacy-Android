@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
+import com.example.pharmacyapp.model.User
 import com.example.pharmacyapp.model.UserResponse
 import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.handle
@@ -20,16 +21,16 @@ class ForgetPasswordViewModel @Inject constructor(
     application: Application,
 ) : AndroidViewModel(application) {
 
-    private var _navigateToSetNewPassword = MutableLiveData<Boolean?>()
-    val navigateToSetNewPassword: LiveData<Boolean?>
+    private var _navigateToSetNewPassword = MutableLiveData<User?>()
+    val navigateToSetNewPassword: LiveData<User?>
         get() = _navigateToSetNewPassword
 
     private var _user = MutableLiveData<NetworkResult<UserResponse>?>()
     val user: LiveData<NetworkResult<UserResponse>?>
         get() = _user
 
-    fun onNavigateToSetNewPassword() {
-        _navigateToSetNewPassword.value = true
+    fun onNavigateToSetNewPassword(user: User) {
+        _navigateToSetNewPassword.value = user
     }
 
     fun onNavigateToSetNewPasswordDone() {
@@ -39,11 +40,11 @@ class ForgetPasswordViewModel @Inject constructor(
 
     fun onFindUser(phone: String) {
         viewModelScope.launch {
-            safecall(phone)
+            findUserSafeCall(phone)
         }
     }
 
-    private suspend fun safecall(phone: String) {
+    private suspend fun findUserSafeCall(phone: String) {
         _user.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
