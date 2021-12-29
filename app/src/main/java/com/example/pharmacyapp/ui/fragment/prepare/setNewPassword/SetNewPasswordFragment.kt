@@ -1,6 +1,7 @@
 package com.example.pharmacyapp.ui.fragment.prepare.setNewPassword
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.SetNewPasswordFragmentBinding
+import com.example.pharmacyapp.util.NetworkResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +25,8 @@ class SetNewPasswordFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[SetNewPasswordViewModel::class.java]
-        viewModel.setUser(args.user)
+        val user = args.user
+        viewModel.setUser(user)
     }
 
     override fun onCreateView(
@@ -44,7 +47,7 @@ class SetNewPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.button.setOnClickListener {
+        binding.resetPasswordButton.setOnClickListener {
             var isNotEmpty = true
             var isPasswordValid = true
 
@@ -84,8 +87,37 @@ class SetNewPasswordFragment : Fragment() {
             }
             if (isNotEmpty && isPasswordValid) {
                 val password = binding.passwordInputLayoutSetNewPassword.editText?.text.toString()
-                viewModel.resetPassword(password)
-                viewModel.onNavigateToLogin() // TODO move to a better place after implementing resetPassword
+                viewModel.onResetPassword(password)
+            }
+        }
+
+        viewModel.resetPasswordResult.observe(viewLifecycleOwner) {
+            it?.let { result ->
+                when (result) {
+                    is NetworkResult.Loading -> {
+                        binding.resetPasswordProgressBar.visibility = View.VISIBLE
+                        binding.resetPasswordErrorTextView.visibility = View.GONE
+
+                    }
+                    is NetworkResult.Error -> {
+                        binding.resetPasswordProgressBar.visibility = View.GONE
+                        binding.resetPasswordErrorTextView.visibility = View.VISIBLE
+                        binding.resetPasswordErrorTextView.text = result.message
+
+                    }
+                    is NetworkResult.Success -> {
+                        binding.resetPasswordProgressBar.visibility = View.GONE
+                        if (result.data?.status == true) {
+                            binding.resetPasswordErrorTextView.visibility = View.GONE
+                            viewModel.onNavigateToLogin()
+                        } else {
+                            binding.resetPasswordErrorTextView.visibility = View.VISIBLE
+                            Log.v("server resetPassword error", result.data?.message.toString())
+                            binding.resetPasswordErrorTextView.text = getString(R.string.user_not_found)
+                        }
+                    }
+                }
+
             }
         }
 

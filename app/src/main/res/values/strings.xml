@@ -54,4 +54,5 @@
     <string name="new_password">New Password</string>
     <string name="login_credential_error">Your Phone Number Or Password Is Not Correct!</string>
     <string name="item_background_description">item background description</string>
+    <string name="user_not_found">User Not Found</string>
 </resources>

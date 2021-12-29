@@ -50,4 +50,10 @@ interface PharmacyApi {
         @Query("ins_num") insuranceNumber: String?,
         @Query("ins_id") insuranceId: Int?,
     ): Response<CreatePatientResponse>
+
+    @POST("api/user/reset")
+    suspend fun resetPassword(
+        @Query("id") id: Int,
+        @Query("password") password: String,
+    ): Response<UserResponse>
 }

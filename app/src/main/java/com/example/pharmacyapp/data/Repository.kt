@@ -47,6 +47,10 @@ class Repository @Inject constructor(
 
     }
 
+    suspend fun resetPassword(id: Int, password: String) : Response<UserResponse> {
+        return remoteDataSource.resetPassword(id, password)
+    }
+
     val remote = remoteDataSource // TODO remove this
 
 
