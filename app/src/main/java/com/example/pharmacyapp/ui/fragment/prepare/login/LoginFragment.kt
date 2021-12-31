@@ -115,9 +115,11 @@ class LoginFragment : Fragment() {
                     }
                     is NetworkResult.Success -> {
                         if (networkResult.data?.status == true) {
+                            binding.loginProgressBar.visibility = View.VISIBLE
                             binding.loginErrorTextView.visibility = View.GONE
                             viewModel.onSaveUser(networkResult.data)
                         } else {
+                            binding.loginProgressBar.visibility = View.GONE
                             binding.loginErrorTextView.visibility = View.VISIBLE
                             Log.v("server login error", networkResult.data?.message.toString())
                             binding.loginErrorTextView.text =
