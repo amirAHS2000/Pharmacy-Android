@@ -9,6 +9,7 @@ import javax.inject.Inject
 @ViewModelScoped
 class Repository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
+    val dataStore: DataStoreRepository
 ) {
     suspend fun findUserByPhone(phone: String): Response<UserResponse> {
         return remoteDataSource.findUserByPhone(phone)
@@ -53,5 +54,8 @@ class Repository @Inject constructor(
 
     val remote = remoteDataSource // TODO remove this
 
+    suspend fun saveUserLocally(id: Int, token: String): Boolean {
+        return dataStore.saveUserData(id, token)
+    }
 
 }

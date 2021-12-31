@@ -7,13 +7,13 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_NAME
 import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_USER_ID
 import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_USER_TOKEN
-import javax.inject.Inject
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
+import javax.inject.Inject
 
 private val Context.datastore by preferencesDataStore(PREFERENCE_NAME)
 
@@ -29,12 +29,13 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
     suspend fun saveUserData(
         userID: Int,
-        userToken: String
-    ) {
+        userToken: String,
+    ): Boolean {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.userIdKey] = userID
             preferences[PreferenceKeys.userTokenKey] = userToken
         }
+        return true
     }
 
     val readUserData: Flow<UserDataStore> = dataStore.data
@@ -57,5 +58,5 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
 data class UserDataStore(
     val userId: Int,
-    val userToken: String
+    val userToken: String,
 )
