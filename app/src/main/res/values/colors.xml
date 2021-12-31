@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="darkGrey">#121212</color>
 
     <!--  profile header colors  -->
     <color name="profile_header_background_color1">#AD7CF4</color>
