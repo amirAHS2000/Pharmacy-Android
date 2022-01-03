@@ -36,9 +36,10 @@ interface PharmacyApi {
     @GET("api/")
     suspend fun getUserInfo(): Response<User>
 
-    @POST("api/user/find")
+    @POST("api/user/findPatient")
     suspend fun getUserInfoByPhone(
-        @Query("phone") phone: String
+        @Query("phone") phone: String,
+        @Query("nat_num") nationalNumber: String
     ): Response<UserResponse>
 
     @POST("api/register/patient")

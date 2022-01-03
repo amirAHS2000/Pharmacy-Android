@@ -52,8 +52,8 @@ class RemoteDataSource @Inject constructor(
         return pharmacyApi.getUserInfo()
     }
 
-    suspend fun findUserByPhone(phone: String): Response<UserResponse> {
-        return pharmacyApi.getUserInfoByPhone(phone)
+    suspend fun findUserByPhone(phone: String, nationalNumber: String): Response<UserResponse> {
+        return pharmacyApi.getUserInfoByPhone(phone, nationalNumber)
     }
 
     suspend fun resetPassword(id: Int, password: String): Response<UserResponse> {

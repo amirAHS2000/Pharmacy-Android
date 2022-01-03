@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="darkGrey">#121212</color>
 
     <!--  profile header colors  -->
     <color name="profile_header_background_color1">#AD7CF4</color>
@@ -14,5 +15,18 @@
     <!--  home background colors  -->
     <color name="home_background_start_color">#FFCF91</color>
     <color name="home_background_end_color">#FFA027</color>
+
+    <!--  theme colors  -->
+    <color name="primaryColor">#05dfd7</color>
+    <color name="primaryLightColor">#69ffff</color>
+    <color name="primaryDarkColor">#00aca6</color>
+<!--    <color name="secondaryColor">#f35588</color>-->
+<!--    <color name="secondaryLightColor">#ff89b8</color>-->
+<!--    <color name="secondaryDarkColor">#BC175B</color>-->
+    <color name="secondaryColor">#c51162</color>
+    <color name="secondaryLightColor">#f35588</color>
+    <color name="secondaryDarkColor">#8e0038</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
 
 </resources>

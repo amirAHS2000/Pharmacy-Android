@@ -114,11 +114,12 @@ class LoginFragment : Fragment() {
                         binding.loginErrorTextView.text = networkResult.message
                     }
                     is NetworkResult.Success -> {
-                        binding.loginProgressBar.visibility = View.GONE
                         if (networkResult.data?.status == true) {
+                            binding.loginProgressBar.visibility = View.VISIBLE
                             binding.loginErrorTextView.visibility = View.GONE
-                            viewModel.onNavigateToMain()
+                            viewModel.onSaveUser(networkResult.data)
                         } else {
+                            binding.loginProgressBar.visibility = View.GONE
                             binding.loginErrorTextView.visibility = View.VISIBLE
                             Log.v("server login error", networkResult.data?.message.toString())
                             binding.loginErrorTextView.text =
@@ -127,6 +128,17 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        viewModel.saveUserState.observe(viewLifecycleOwner) {
+            it?.let { state ->
+                binding.loginProgressBar.visibility = View.VISIBLE
+                if (state) {
+                    viewModel.onNavigateToMain()
+                }
+            }
+            if (it == null)
+                binding.loginProgressBar.visibility = View.GONE
         }
     }
 }

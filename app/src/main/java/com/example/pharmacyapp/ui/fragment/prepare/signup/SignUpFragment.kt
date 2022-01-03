@@ -70,7 +70,7 @@ class SignUpFragment : Fragment() {
             binding.nationalNumberInputLayout.apply {
                 if (editText?.text?.isEmpty() == true) {
                     isErrorEnabled = true
-                    error = resources.getString(R.string.national_name_empty_error)
+                    error = resources.getString(R.string.national_number_empty_error)
                     isNotEmpty = false
                 } else {
                     isErrorEnabled = false
@@ -146,11 +146,12 @@ class SignUpFragment : Fragment() {
                         binding.signUpErrorTextView.text = response.message
                     }
                     is NetworkResult.Success -> {
-                        binding.signUpProgressBar.visibility = View.GONE
                         if (response.data?.status == true) {
+                            binding.signUpProgressBar.visibility = View.VISIBLE
                             binding.signUpErrorTextView.visibility = View.GONE
-                            viewModel.onNavigateToMain()
+                            viewModel.onSaveUser(response.data)
                         } else {
+                            binding.signUpProgressBar.visibility = View.GONE
                             binding.signUpErrorTextView.visibility = View.VISIBLE
                             Log.v("server login error", response.data?.message.toString())
                             binding.signUpErrorTextView.text =
@@ -159,6 +160,17 @@ class SignUpFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        viewModel.saveUserState.observe(viewLifecycleOwner) {
+            it?.let { state ->
+                binding.signUpProgressBar.visibility = View.VISIBLE
+                if (state) {
+                    viewModel.onNavigateToMain()
+                }
+            }
+            if (it == null)
+                binding.signUpProgressBar.visibility = View.GONE
         }
 
         viewModel.navigateToLogin.observe(viewLifecycleOwner) {
