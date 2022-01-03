@@ -55,4 +55,15 @@
     <string name="login_credential_error">Your Phone Number Or Password Is Not Correct!</string>
     <string name="item_background_description">item background description</string>
     <string name="user_not_found">User Not Found</string>
+    <string name="medicine_images_desc">medicine images</string>
+
+    <!--  medicine description test text  -->
+    <string name="description_text_title">Description</string>
+    <string name="description_text">
+        Medicine is the science[1] and practice[2] of caring for a patient, managing the diagnosis, prognosis, prevention, treatment, palliation of their injury or disease, and promoting their health. Medicine encompasses a variety of health care practices evolved to maintain and restore health by the prevention and treatment of illness. Contemporary medicine applies biomedical sciences, biomedical research, genetics, and medical technology to diagnose, treat, and prevent injury and disease, typically through pharmaceuticals or surgery, but also through therapies as diverse as psychotherapy, external splints and traction, medical devices, biologics, and ionizing radiation, amongst others.[3]
+
+Medicine has been practiced since prehistoric times, during most of which it was an art (an area of skill and knowledge) frequently having connections to the religious and philosophical beliefs of local culture. For example, a medicine man would apply herbs and say prayers for healing, or an ancient philosopher and physician would apply bloodletting according to the theories of humorism. In recent centuries, since the advent of modern science, most medicine has become a combination of art and science (both basic and applied, under the umbrella of medical science). While stitching technique for sutures is an art learned through practice, the knowledge of what happens at the cellular and molecular level in the tissues being stitched arises through science.
+
+Prescientific forms of medicine are now known as traditional medicine or folk medicine, which remains commonly used in the absence of scientific medicine, and are thus called alternative medicine. Alternative treatments outside of scientific medicine having safety and efficacy concerns are termed quackery.
+    </string>
 </resources>
