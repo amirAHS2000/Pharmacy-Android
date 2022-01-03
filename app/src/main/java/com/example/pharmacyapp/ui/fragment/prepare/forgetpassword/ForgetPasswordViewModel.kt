@@ -38,17 +38,17 @@ class ForgetPasswordViewModel @Inject constructor(
         _user.value = null
     }
 
-    fun onFindUser(phone: String) {
+    fun onFindUser(phone: String, nationalNumber: String) {
         viewModelScope.launch {
-            findUserSafeCall(phone)
+            findUserSafeCall(phone, nationalNumber)
         }
     }
 
-    private suspend fun findUserSafeCall(phone: String) {
+    private suspend fun findUserSafeCall(phone: String, nationalNumber: String) {
         _user.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                _user.value = repository.findUserByPhone(phone).handle()
+                _user.value = repository.findUserByPhone(phone, nationalNumber).handle()
             } catch (e: Exception) {
                 _user.value = NetworkResult.Error("There Was Something Wrong")
             }

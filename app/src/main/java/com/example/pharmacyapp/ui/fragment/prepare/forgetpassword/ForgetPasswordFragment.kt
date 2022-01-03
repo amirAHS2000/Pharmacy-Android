@@ -44,14 +44,25 @@ class ForgetPasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirmButton.setOnClickListener {
+            var isEmpty = false
             binding.phoneInputLayoutForgotPassword.apply {
                 if (editText?.text?.isEmpty() == true) {
+                    isEmpty = true
                     isErrorEnabled = true
                     error = getString(R.string.phone_empty_error)
-                } else {
-                    val phone = editText!!.text.toString()
-                    viewModel.onFindUser(phone)
                 }
+            }
+            binding.nationalNumberInputLayoutForgotPassword.apply {
+                if (editText?.text?.isEmpty() == true) {
+                    isEmpty = true
+                    isErrorEnabled = true
+                    error = getString(R.string.national_number_empty_error)
+                }
+            }
+            if (!isEmpty) {
+                val phone = binding.phoneInputLayoutForgotPassword.editText!!.text.toString()
+                val nationalNumber = binding.nationalNumberInputLayoutForgotPassword.editText!!.text.toString()
+                viewModel.onFindUser(phone, nationalNumber)
             }
         }
 
@@ -75,7 +86,8 @@ class ForgetPasswordFragment : Fragment() {
                         } else {
                             binding.forgetPasswordErrorTextView.visibility = View.VISIBLE
                             Log.v("server ForgetPassword error", result.data?.message.toString())
-                            binding.forgetPasswordErrorTextView.text = getString(R.string.no_user_founded)
+                            binding.forgetPasswordErrorTextView.text =
+                                getString(R.string.no_user_founded)
                         }
                     }
                 }
@@ -87,7 +99,9 @@ class ForgetPasswordFragment : Fragment() {
 
         viewModel.navigateToSetNewPassword.observe(viewLifecycleOwner) {
             it?.let { user ->
-                val action = ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToSetNewPasswordFragment(user)
+                val action =
+                    ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToSetNewPasswordFragment(
+                        user)
                 findNavController().navigate(action)
                 viewModel.onNavigateToSetNewPasswordDone()
             }

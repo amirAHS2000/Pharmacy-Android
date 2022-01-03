@@ -11,8 +11,8 @@ class Repository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     val dataStore: DataStoreRepository
 ) {
-    suspend fun findUserByPhone(phone: String): Response<UserResponse> {
-        return remoteDataSource.findUserByPhone(phone)
+    suspend fun findUserByPhone(phone: String, nationalNumber: String): Response<UserResponse> {
+        return remoteDataSource.findUserByPhone(phone, nationalNumber)
     }
 
     suspend fun login(phone: String, password: String): Response<LoginResponse> {

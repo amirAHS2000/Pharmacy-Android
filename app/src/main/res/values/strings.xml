@@ -36,7 +36,7 @@
     <string name="log_in">Log in</string>
     <string name="firstname_empty_error">Enter Your First Name</string>
     <string name="lastname_empty_error">Enter Your Last Name</string>
-    <string name="national_name_empty_error">Enter Your National Number</string>
+    <string name="national_number_empty_error">Enter Your National Number</string>
     <string name="add_password_empty_error">Enter A Password</string>
     <string name="confirm_name_empty_error">Enter Your Password Again</string>
     <string name="password_match_error">Your Passwords Don\'t Match</string>

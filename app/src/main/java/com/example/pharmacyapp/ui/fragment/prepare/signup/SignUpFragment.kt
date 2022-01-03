@@ -70,7 +70,7 @@ class SignUpFragment : Fragment() {
             binding.nationalNumberInputLayout.apply {
                 if (editText?.text?.isEmpty() == true) {
                     isErrorEnabled = true
-                    error = resources.getString(R.string.national_name_empty_error)
+                    error = resources.getString(R.string.national_number_empty_error)
                     isNotEmpty = false
                 } else {
                     isErrorEnabled = false
