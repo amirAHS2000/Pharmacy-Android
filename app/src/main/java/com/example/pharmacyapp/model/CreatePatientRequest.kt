@@ -6,5 +6,5 @@ data class CreatePatientRequest(
     val phone: String,
     val nationalNumber: String,
     val insuranceNumber: String?,
-    val insuranceId: Int?,
+    val insuranceId: Int?
 )

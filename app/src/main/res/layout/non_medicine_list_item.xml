@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="medicine"
-            type="com.example.pharmacyapp.model.Medicine" />
+            name="nonMedicine"
+            type="com.example.pharmacyapp.model.NonMedicine" />
 
         <variable
             name="clickListener"
-            type="com.example.pharmacyapp.adapter.MedicineListener" />
+            type="com.example.pharmacyapp.adapter.NonMedicineCLickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -19,7 +18,7 @@
         android:layout_height="@dimen/category_list_item_height"
         android:layout_margin="10dp"
         android:elevation="3dp"
-        android:onClickListener="@{() -> clickListener.onClick(medicine)}"
+        android:onClickListener="@{() -> clickListener.onclick(nonMedicine)}"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +33,7 @@
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/medicine_list_item_description"
                 android:src="@drawable/ic_profile"
-                app:imageUrl="@{medicine.imageUri}"
+                app:imageUrl="@{nonMedicine.imageUri}"
                 app:layout_constraintBottom_toTopOf="@+id/materialTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -47,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="@{medicine.name}"
+                android:text="@{nonMedicine.name}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

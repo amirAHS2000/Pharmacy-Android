@@ -5,20 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pharmacyapp.databinding.MedicineListItemBinding
-import com.example.pharmacyapp.model.Medicine
+import com.example.pharmacyapp.databinding.NonMedicineListItemBinding
+import com.example.pharmacyapp.model.NonMedicine
 
-class MedicineAdapter(private val clickListener: MedicineListener) :
-    ListAdapter<Medicine, MedicineAdapter.ViewHolder>(MedicineDiffCallback()) {
-
+class NonMedicineAdapter(private val clickListener: NonMedicineCLickListener) :
+    ListAdapter<NonMedicine, NonMedicineAdapter.ViewHolder>(NonMedicineDiffCallBack()) {
     class ViewHolder private constructor(
-        private val binding: MedicineListItemBinding,
+        private val binding: NonMedicineListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            result: Medicine?,
-            clickListener: MedicineListener
+            nonMedicine: NonMedicine?,
+            clickListener: NonMedicineCLickListener
         ) {
-            binding.medicine = result
+            binding.nonMedicine = nonMedicine
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -26,7 +25,7 @@ class MedicineAdapter(private val clickListener: MedicineListener) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = MedicineListItemBinding.inflate(layoutInflater, parent, false)
+                val binding = NonMedicineListItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
@@ -39,19 +38,20 @@ class MedicineAdapter(private val clickListener: MedicineListener) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
     }
+
 }
 
-class MedicineDiffCallback : DiffUtil.ItemCallback<Medicine>() {
-    override fun areItemsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
+class NonMedicineDiffCallBack : DiffUtil.ItemCallback<NonMedicine>() {
+    override fun areItemsTheSame(oldItem: NonMedicine, newItem: NonMedicine): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
+    override fun areContentsTheSame(oldItem: NonMedicine, newItem: NonMedicine): Boolean {
         return oldItem == newItem
     }
 
 }
 
-class MedicineListener(val clickListener: (medicineID: Int) -> Unit) {
-    fun onClick(medicine: Medicine) = clickListener(medicine.id)
+class NonMedicineCLickListener(val clickListener: (nonMedicineId: Int) -> Unit) {
+    fun onclick(nonMedicine: NonMedicine) = clickListener(nonMedicine.id)
 }

@@ -9,5 +9,5 @@ data class User(
     val id: Int,
     val ref_id: Int,
     val phone: String?,
-    val updated_at: String?,
+    val updated_at: String?
 ) : Parcelable

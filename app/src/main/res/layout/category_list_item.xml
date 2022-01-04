@@ -19,6 +19,7 @@
         android:layout_height="@dimen/category_list_item_height"
         android:layout_margin="10dp"
         android:elevation="3dp"
+        android:onClickListener="@{() -> clickListener.onClick(category)}"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +34,7 @@
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/category_list_item_description_text"
                 android:src="@drawable/ic_profile"
+                app:imageUrl="@{category.imageUri}"
                 app:layout_constraintBottom_toTopOf="@+id/materialTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -45,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="نام دارو"
+                android:text="@{category.name}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

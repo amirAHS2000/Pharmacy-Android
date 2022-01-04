@@ -2,11 +2,13 @@ package com.example.pharmacyapp.ui.fragment.store
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.pharmacyapp.R
+import com.example.pharmacyapp.adapter.*
 import com.example.pharmacyapp.databinding.FragmentStoreBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +32,18 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_store, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        binding.categoriesList.adapter = CategoryAdapter(CategoryListener { categoryId ->
+            Toast.makeText(context, "$categoryId", Toast.LENGTH_SHORT).show()
+        })
+
+        binding.topSellersList.adapter = MedicineAdapter(MedicineListener { medicineId ->
+            Toast.makeText(context, "$medicineId", Toast.LENGTH_SHORT).show()
+        })
+
+        binding.nonMedsList.adapter = NonMedicineAdapter(NonMedicineCLickListener { nonMedicineId ->
+            Toast.makeText(context, "$nonMedicineId", Toast.LENGTH_SHORT).show()
+        })
 
         return binding.root
     }

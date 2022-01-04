@@ -11,8 +11,10 @@ import com.example.pharmacyapp.R
 import com.example.pharmacyapp.adapter.CategoryAdapter
 import com.example.pharmacyapp.adapter.ImageViewPagerAdapter
 import com.example.pharmacyapp.adapter.MedicineAdapter
+import com.example.pharmacyapp.adapter.NonMedicineAdapter
 import com.example.pharmacyapp.model.Category
 import com.example.pharmacyapp.model.Medicine
+import com.example.pharmacyapp.model.NonMedicine
 import com.example.pharmacyapp.model.Photo
 
 @BindingAdapter("listDataCategory")
@@ -24,6 +26,12 @@ fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: List<Category>?) 
 @BindingAdapter("listDataMedicine")
 fun bindRecyclerViewMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
     val adapter = recyclerView.adapter as MedicineAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listDataNonMedicine")
+fun bindRecyclerViewNonMedicine(recyclerView: RecyclerView, data: List<NonMedicine>?) {
+    val adapter = recyclerView.adapter as NonMedicineAdapter
     adapter.submitList(data)
 }
 

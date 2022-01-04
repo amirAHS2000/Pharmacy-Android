@@ -7,5 +7,5 @@ data class Patient(
     val ins_id: Int?,
     val ins_num: String?,
     val nat_num: String,
-    val phone: String,
+    val phone: String
 )

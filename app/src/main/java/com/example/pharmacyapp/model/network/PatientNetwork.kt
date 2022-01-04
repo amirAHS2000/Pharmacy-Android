@@ -9,5 +9,5 @@ data class PatientNetwork(
     val nat_num: String,
     val phone: String,
     val created_at: String,
-    val updated_at: String,
+    val updated_at: String
 )
