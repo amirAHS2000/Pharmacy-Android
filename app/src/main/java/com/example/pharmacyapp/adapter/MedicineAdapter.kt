@@ -2,11 +2,12 @@ package com.example.pharmacyapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pharmacyapp.databinding.MedicineListItemBinding
 import com.example.pharmacyapp.model.Medicine
+import com.example.pharmacyapp.util.clicklistener.MedicineListener
+import com.example.pharmacyapp.util.diffcallback.MedicineDiffCallback
 
 class MedicineAdapter(private val clickListener: MedicineListener) :
     ListAdapter<Medicine, MedicineAdapter.ViewHolder>(MedicineDiffCallback()) {
@@ -41,17 +42,3 @@ class MedicineAdapter(private val clickListener: MedicineListener) :
     }
 }
 
-class MedicineDiffCallback : DiffUtil.ItemCallback<Medicine>() {
-    override fun areItemsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Medicine, newItem: Medicine): Boolean {
-        return oldItem == newItem
-    }
-
-}
-
-class MedicineListener(val clickListener: (medicineID: Int) -> Unit) {
-    fun onClick(medicine: Medicine) = clickListener(medicine.id)
-}

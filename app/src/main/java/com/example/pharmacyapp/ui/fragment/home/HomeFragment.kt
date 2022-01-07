@@ -5,6 +5,7 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
@@ -15,12 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+//    private lateinit var viewModel: HomeViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-    }
+    private val viewModel: HomeViewModel by viewModels()
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +37,7 @@ class HomeFragment : Fragment() {
 
 
         binding.itemContainer1.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_productFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_productFragment)
         }
 
         return binding.root

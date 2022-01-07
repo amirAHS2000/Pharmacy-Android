@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.pharmacyapp.adapter.CategoryListener" />
+            type="com.example.pharmacyapp.util.clicklistener.CategoryListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

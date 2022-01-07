@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.adapter.ImageViewPagerAdapter
 import com.example.pharmacyapp.databinding.FragmentProductBinding
@@ -17,12 +19,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProductFragment : Fragment() {
 
     private lateinit var binding: FragmentProductBinding
-    private lateinit var viewModel: ProductViewModel
+//    private lateinit var viewModel: ProductViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
-    }
+    private val viewModel: ProductViewModel by viewModels()
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -18,7 +19,7 @@
             android:id="@+id/search_view_toolbar"
             android:layout_width="0dp"
             android:layout_height="?actionBarSize"
-            android:background="@color/purple_700"
+            android:background="?colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +33,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@id/search_view_toolbar"
             app:layout_constraintVertical_bias="0.0">
 
@@ -43,19 +43,18 @@
                 android:paddingBottom="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/category_header"
-                    android:layout_width="0dp"
+                    android:id="@+id/medicine_category_header"
+                    android:layout_width="411dp"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/header_padding"
-                    app:layout_constraintBottom_toTopOf="@+id/categories_list"
+                    app:layout_constraintBottom_toTopOf="@+id/medicine_categories_list"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="spread">
+                    app:layout_constraintVertical_chainStyle="packed">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/categories_text_label"
+                        android:id="@+id/medicine_categories_text_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/start_margin"
@@ -67,7 +66,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
-                        android:id="@+id/more_category"
+                        android:id="@+id/more_medicine_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -94,33 +93,31 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/categories_list"
-                    android:layout_width="0dp"
+                    android:id="@+id/medicine_categories_list"
+                    android:layout_width="411dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toTopOf="@+id/top_sellers_header"
+                    app:layout_constraintBottom_toTopOf="@+id/medicine_top_sellers_header"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/category_header"
-                    app:listDataCategory="@{viewModel.category}" />
+                    app:layout_constraintTop_toBottomOf="@+id/medicine_category_header"
+                    app:listDataCategory="@{viewModel.medicineCategory}" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/top_sellers_header"
-                    android:layout_width="0dp"
+                    android:id="@+id/medicine_top_sellers_header"
+                    android:layout_width="411dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:padding="@dimen/header_padding"
-                    app:layout_constraintBottom_toTopOf="@+id/top_sellers_list"
+                    app:layout_constraintBottom_toTopOf="@+id/medicine_top_sellers_list"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categories_list">
+                    app:layout_constraintTop_toBottomOf="@+id/medicine_categories_list">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/top_sellers_text_label"
+                        android:id="@+id/medicine_top_sellers_text_label"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/start_margin"
@@ -132,7 +129,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
-                        android:id="@+id/more_top_seller"
+                        android:id="@+id/more_medicine_top_seller"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -159,30 +156,28 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/top_sellers_list"
-                    android:layout_width="0dp"
+                    android:id="@+id/medicine_top_sellers_list"
+                    android:layout_width="411dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toTopOf="@+id/non_meds_header"
+                    app:layout_constraintBottom_toTopOf="@+id/non_meds_category_header"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/top_sellers_header"
-                    app:listDataMedicine="@{viewModel.topSellers}" />
+                    app:layout_constraintTop_toBottomOf="@+id/medicine_top_sellers_header"
+                    app:listDataMedicine="@{viewModel.medicineTopSellers}" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/non_meds_header"
-                    android:layout_width="0dp"
+                    android:id="@+id/non_meds_category_header"
+                    android:layout_width="411dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:padding="@dimen/header_padding"
-                    app:layout_constraintBottom_toTopOf="@+id/non_meds_list"
+                    app:layout_constraintBottom_toTopOf="@+id/non_meds_category_list"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/top_sellers_list">
+                    app:layout_constraintTop_toBottomOf="@+id/medicine_top_sellers_list">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/non_meds_text_label"
@@ -190,6 +185,69 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/start_margin"
                         android:text="@string/non_meds_text_label"
+                        android:textSize="@dimen/label_text_size"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/more_non_meds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/margin_more_ic_txt"
+                            android:gravity="center"
+                            android:text="@string/more_text"
+                            android:textSize="@dimen/more_option_text_size" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/more_option_icon_description"
+                            android:src="@drawable/ic_more" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/non_meds_category_list"
+                    android:layout_width="411dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/rv_margin_home"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/non_meds_top_sellers_header"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/non_meds_category_header"
+                    app:listDataCategory="@{viewModel.nonMedicineCategory}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/non_meds_top_sellers_header"
+                    android:layout_width="411dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/rv_margin_home"
+                    android:padding="@dimen/header_padding"
+                    app:layout_constraintBottom_toTopOf="@+id/non_meds_top_sellers_list"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/non_meds_category_list">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/non_meds_top_sellers_text_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/start_margin"
+                        android:text="@string/top_sellers_nonmedicine_text"
                         android:textSize="@dimen/label_text_size"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -224,18 +282,18 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/non_meds_list"
-                    android:layout_width="0dp"
+                    android:id="@+id/non_meds_top_sellers_list"
+                    android:layout_width="411dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/non_meds_header"
-                    app:listDataNonMedicine="@{viewModel.nonMedicine}" />
+                    app:layout_constraintTop_toBottomOf="@+id/non_meds_top_sellers_header"
+                    app:listDataNonMedicine="@{viewModel.nonMedicineTopSellers}" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

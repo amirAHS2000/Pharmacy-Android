@@ -1,5 +1,6 @@
 package com.example.pharmacyapp.util
 
+import android.graphics.Color
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -8,14 +9,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.pharmacyapp.R
-import com.example.pharmacyapp.adapter.CategoryAdapter
-import com.example.pharmacyapp.adapter.ImageViewPagerAdapter
-import com.example.pharmacyapp.adapter.MedicineAdapter
-import com.example.pharmacyapp.adapter.NonMedicineAdapter
+import com.example.pharmacyapp.adapter.*
 import com.example.pharmacyapp.model.Category
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.model.NonMedicine
 import com.example.pharmacyapp.model.Photo
+import com.google.android.material.textview.MaterialTextView
 
 @BindingAdapter("listDataCategory")
 fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: List<Category>?) {
@@ -35,6 +34,18 @@ fun bindRecyclerViewNonMedicine(recyclerView: RecyclerView, data: List<NonMedici
     adapter.submitList(data)
 }
 
+@BindingAdapter("listDataVerticalMedicine")
+fun bindRecyclerViewVerticalMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
+    val adapter = recyclerView.adapter as MedicineVerticalAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listDataVerticalNonMedicine")
+fun bindRecyclerViewVerticalNonMedicine(recyclerView: RecyclerView, data: List<NonMedicine>?) {
+    val adapter = recyclerView.adapter as NonMedicineVerticalAdapter
+    adapter.submitList(data)
+}
+
 @BindingAdapter("imageUrl")
 fun bindImage(
     imageView: ImageView,
@@ -50,6 +61,23 @@ fun bindImage(
                     .error(R.drawable.image_not_found)
             )
             .into(imageView)
+    }
+}
+
+@BindingAdapter("priceText")
+fun bindTextView(textView: MaterialTextView, price: Int) {
+    val priceText = "$price تومان "
+    textView.text = priceText
+}
+
+@BindingAdapter("stockText")
+fun bindStockTextView(textView: MaterialTextView, stock: Int) {
+    if (stock == 0) {
+        textView.text = "در انبار موجود نیست"
+        textView.setTextColor(Color.RED)
+    } else {
+        textView.text = "موجود در انبار"
+        textView.setTextColor(Color.GREEN)
     }
 }
 

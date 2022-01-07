@@ -4,21 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pharmacyapp.databinding.CategoryListItemBinding
-import com.example.pharmacyapp.model.Category
-import com.example.pharmacyapp.util.clicklistener.CategoryListener
-import com.example.pharmacyapp.util.diffcallback.CategoryDiffCallback
+import com.example.pharmacyapp.databinding.MedicineListItemBinding
+import com.example.pharmacyapp.databinding.MedicineRowListItemBinding
+import com.example.pharmacyapp.model.Medicine
+import com.example.pharmacyapp.util.clicklistener.MedicineListener
+import com.example.pharmacyapp.util.diffcallback.MedicineDiffCallback
 
-class CategoryAdapter(private val clickListener: CategoryListener) :
-    ListAdapter<Category, CategoryAdapter.ViewHolder>(CategoryDiffCallback()) {
+class MedicineVerticalAdapter(private val clickListener: MedicineListener) :
+    ListAdapter<Medicine, MedicineVerticalAdapter.ViewHolder>(MedicineDiffCallback()) {
+
     class ViewHolder private constructor(
-        private val binding: CategoryListItemBinding,
+        private val binding: MedicineRowListItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            result: Category?,
-            clickListener: CategoryListener,
+            result: Medicine?,
+            clickListener: MedicineListener
         ) {
-            binding.category = result
+            binding.medicine = result
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -26,11 +28,10 @@ class CategoryAdapter(private val clickListener: CategoryListener) :
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = CategoryListItemBinding.inflate(layoutInflater, parent, false)
+                val binding = MedicineRowListItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

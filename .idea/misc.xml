@@ -11,11 +11,14 @@
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_launcher_med_foreground.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_medicines_circle.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_price.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_profile.xml" value="0.2703125" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_stock.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/ic_store.xml" value="0.2703125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/loading_image.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/loading_image_animation.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/profile_header_background.xml" value="0.2703125" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/rv_row_item_background.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/selected_pager_dot.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/shape_rounded_corner.xml" value="0.3828125" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/drawable/splash_screen_background.xml" value="0.3828125" />
@@ -29,13 +32,17 @@
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_forget_password.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_medicines.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_non_medicines.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_product.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_profile.xml" value="0.2596491228070175" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_signup.xml" value="0.33" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/fragment_store.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/image_viewpager_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/medicine_list_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/medicine_row_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/non_medicine_list_item.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/non_medicine_row_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/layout/set_new_password_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProject/PharmacyApp/app/src/main/res/menu/home_menu.xml" value="0.36666666666666664" />

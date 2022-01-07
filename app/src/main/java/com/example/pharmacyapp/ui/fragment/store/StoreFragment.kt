@@ -6,22 +6,30 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.adapter.*
 import com.example.pharmacyapp.databinding.FragmentStoreBinding
+import com.example.pharmacyapp.util.clicklistener.CategoryListener
+import com.example.pharmacyapp.util.clicklistener.MedicineListener
+import com.example.pharmacyapp.util.clicklistener.NonMedicineListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentStoreBinding
-    private lateinit var viewModel: StoreViewModel
+//    private lateinit var viewModel: StoreViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[StoreViewModel::class.java]
-    }
+    private val viewModel: StoreViewModel by viewModels()
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = ViewModelProvider(requireActivity())[StoreViewModel::class.java]
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,16 +41,49 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.categoriesList.adapter = CategoryAdapter(CategoryListener { categoryId ->
-            Toast.makeText(context, "$categoryId", Toast.LENGTH_SHORT).show()
+        binding.medicineCategoriesList.adapter = CategoryAdapter(CategoryListener { categoryId ->
+            viewModel.onMedicineItemClicked(categoryId)
         })
 
-        binding.topSellersList.adapter = MedicineAdapter(MedicineListener { medicineId ->
-            Toast.makeText(context, "$medicineId", Toast.LENGTH_SHORT).show()
+        binding.nonMedsCategoryList.adapter = CategoryAdapter(CategoryListener { categoryID ->
+            viewModel.onNonMedicineClicked(categoryID)
         })
 
-        binding.nonMedsList.adapter = NonMedicineAdapter(NonMedicineCLickListener { nonMedicineId ->
-            Toast.makeText(context, "$nonMedicineId", Toast.LENGTH_SHORT).show()
+        binding.medicineTopSellersList.adapter = MedicineAdapter(MedicineListener { medicineId ->
+            viewModel.onProductClicked(medicineId)
+        })
+
+        binding.nonMedsTopSellersList.adapter =
+            NonMedicineAdapter(NonMedicineListener { nonMedicineId ->
+                viewModel.onProductClicked(nonMedicineId)
+            })
+
+        viewModel.navigateToProduct.observe(viewLifecycleOwner, Observer { productId ->
+            productId?.let {
+                findNavController().navigate(
+                    StoreFragmentDirections
+                        .actionStoreFragmentToProductFragment(productId)
+                )
+                viewModel.onProductNavigated()
+            }
+        })
+
+        viewModel.navigateToMedicine.observe(viewLifecycleOwner, Observer { categoryId ->
+            categoryId?.let {
+                findNavController().navigate(
+                    StoreFragmentDirections.actionStoreFragmentToMedicineFragment(categoryId)
+                )
+                viewModel.onMedicineNavigated()
+            }
+        })
+
+        viewModel.navigateToNonMedicine.observe(viewLifecycleOwner, Observer { categoryId ->
+            categoryId?.let {
+                findNavController().navigate(
+                    StoreFragmentDirections.actionStoreFragmentToNonMedicineFragment(categoryId)
+                )
+                viewModel.onNonMedicineNavigated()
+            }
         })
 
         return binding.root

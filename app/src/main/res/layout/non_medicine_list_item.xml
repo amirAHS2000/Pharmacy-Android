@@ -10,7 +10,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.pharmacyapp.adapter.NonMedicineCLickListener" />
+            type="com.example.pharmacyapp.util.clicklistener.NonMedicineListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

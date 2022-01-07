@@ -1,7 +1,9 @@
 package com.example.pharmacyapp.ui.fragment.product
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import com.example.pharmacyapp.data.Repository
 import com.example.pharmacyapp.model.Photo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,8 +12,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(
     application: Application,
-    val repository: Repository
+    private val repository: Repository,
+    private val state: SavedStateHandle
 ) : AndroidViewModel(application) {
+
+    //test
+    init {
+        val productId: Int? = state.get<Int>("productId")
+        Log.i("testArgs", "$productId")
+    }
 
     val photos = listOf<Photo>(
         Photo(

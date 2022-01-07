@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentProfileBinding
@@ -15,12 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var viewModel: ProfileViewModel
+//    private lateinit var viewModel: ProfileViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
-    }
+    private val viewModel: ProfileViewModel by viewModels()
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

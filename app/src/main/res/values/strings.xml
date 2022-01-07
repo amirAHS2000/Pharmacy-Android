@@ -42,11 +42,11 @@
     <string name="password_match_error">Your Passwords Don\'t Match</string>
     <string name="password_length_error">Password Should Be 8 characters or more</string>
     <string name="category_list_item_description_text">category list item description</string>
-    <string name="categories_label_text">Categories</string>
+    <string name="categories_label_text">Medicine Category</string>
     <string name="more_text">More</string>
     <string name="more_option_icon_description">more option icon description</string>
-    <string name="top_sellers_text_label">Top Sellers</string>
-    <string name="non_meds_text_label">Non Meds</string>
+    <string name="top_sellers_text_label">Top Sellers Medicine</string>
+    <string name="non_meds_text_label">Non Medicine Category</string>
     <string name="medicine_list_item_description">medicine list item description</string>
     <string name="search_text">Search</string>
     <string name="no_user_founded">No User With This Phone Number Founded</string>
@@ -66,4 +66,8 @@ Medicine has been practiced since prehistoric times, during most of which it was
 
 Prescientific forms of medicine are now known as traditional medicine or folk medicine, which remains commonly used in the absence of scientific medicine, and are thus called alternative medicine. Alternative treatments outside of scientific medicine having safety and efficacy concerns are termed quackery.
     </string>
+    <string name="row_item_image_desc">row item image</string>
+    <string name="stock_icon_desc">stock icon</string>
+    <string name="price_icon_desc">price icon</string>
+    <string name="top_sellers_nonmedicine_text">Top Sellers NonMedicine</string>
 </resources>

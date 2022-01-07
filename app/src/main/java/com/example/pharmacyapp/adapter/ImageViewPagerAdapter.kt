@@ -3,10 +3,10 @@ package com.example.pharmacyapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.pharmacyapp.databinding.ImageViewpagerLayoutBinding
 import com.example.pharmacyapp.model.Photo
+import com.example.pharmacyapp.util.diffcallback.ImageViewPagerDiffCallback
 
 class ImageViewPagerAdapter() :
     ListAdapter<Photo, ImageViewPagerAdapter.ViewHolder>(
@@ -41,15 +41,4 @@ class ImageViewPagerAdapter() :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
-
-class ImageViewPagerDiffCallback : DiffUtil.ItemCallback<Photo>() {
-    override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
-        return oldItem == newItem
-    }
-
 }

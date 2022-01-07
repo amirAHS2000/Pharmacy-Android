@@ -7,15 +7,21 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.pharmacyapp.ui.fragment.home.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_productFragment"
-            app:destination="@id/productFragment" />
-    </fragment>
+        android:label="HomeFragment" />
     <fragment
         android:id="@+id/storeFragment"
         android:name="com.example.pharmacyapp.ui.fragment.store.StoreFragment"
-        android:label="StoreFragment" />
+        android:label="StoreFragment">
+        <action
+            android:id="@+id/action_storeFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_storeFragment_to_medicineFragment"
+            app:destination="@id/medicineFragment" />
+        <action
+            android:id="@+id/action_storeFragment_to_nonMedicineFragment"
+            app:destination="@id/nonMedicineFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.pharmacyapp.ui.fragment.profile.ProfileFragment"
@@ -23,5 +29,34 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.example.pharmacyapp.ui.fragment.product.ProductFragment"
-        android:label="ProductFragment" />
+        android:label="ProductFragment">
+        <argument
+            android:name="productId"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicineFragment"
+        android:name="com.example.pharmacyapp.ui.fragment.medicines.MedicineFragment"
+        android:label="MedicineFragment">
+        <argument
+            android:name="medCategoryId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_medicineFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nonMedicineFragment"
+        android:name="com.example.pharmacyapp.ui.fragment.nonmedicines.NonMedicineFragment"
+        android:label="NonMedicineFragment">
+        <argument
+            android:name="nonMedCategoryId"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nonMedicineFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
 </navigation>
