@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -109,6 +110,7 @@ class SetNewPasswordFragment : Fragment() {
                         binding.resetPasswordProgressBar.visibility = View.GONE
                         if (result.data?.status == true) {
                             binding.resetPasswordErrorTextView.visibility = View.GONE
+                            Toast.makeText(context,"Your password changed successfully", Toast.LENGTH_SHORT).show()
                             viewModel.onNavigateToLogin()
                         } else {
                             binding.resetPasswordErrorTextView.visibility = View.VISIBLE
