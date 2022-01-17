@@ -38,6 +38,7 @@ class ProductFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.medicine = viewModel.medicine
 
         //---------------------medicine images (viewpager)---------------------//
         binding.viewPager.adapter = ImageViewPagerAdapter()

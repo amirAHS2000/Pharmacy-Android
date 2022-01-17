@@ -14,7 +14,7 @@
     <color name="profile_header_background_color2">#6F10F8</color>
     <!--  home background colors  -->
     <color name="home_background_start_color">#FFCF91</color>
-    <color name="home_background_end_color">#FFA027</color>
+    <color name="home_background_end_color">#FFB85E</color>
 
     <!--  recyclerview row item background color  -->
     <color name="rv_row_start_color">#C9FFFF</color>

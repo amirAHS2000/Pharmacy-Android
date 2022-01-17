@@ -70,4 +70,7 @@ Prescientific forms of medicine are now known as traditional medicine or folk me
     <string name="stock_icon_desc">stock icon</string>
     <string name="price_icon_desc">price icon</string>
     <string name="top_sellers_nonmedicine_text">Top Sellers NonMedicine</string>
+    <string name="price_text_title">Price</string>
+    <string name="medicine_name_text_title">medicine name</string>
+    <string name="prescription_icon_desc">prescription icon desc</string>
 </resources>

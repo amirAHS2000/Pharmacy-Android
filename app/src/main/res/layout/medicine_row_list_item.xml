@@ -16,7 +16,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:layout_margin="8dp"
         android:onClick="@{() -> clickListener.onClick(medicine)}"
         app:cardCornerRadius="10dp">
@@ -37,11 +37,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    app:imageUrl="@{medicine.imageUri}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/row_item_image_desc"
                     android:scaleType="fitXY"
+                    app:imageUrl="@{medicine.imageUri}"
                     tools:src="@drawable/background_item_first" />
 
             </androidx.cardview.widget.CardView>
@@ -50,7 +50,7 @@
                 android:id="@+id/medicine_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
                 android:text="@{medicine.name}"
                 android:textSize="25sp"
@@ -60,15 +60,14 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@id/medicine_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintVertical_chainStyle="spread_inside"
                 tools:text="استامینوفن" />
 
             <ImageView
                 android:id="@+id/stock_icon_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
                 android:contentDescription="@string/stock_icon_desc"
                 android:src="@drawable/ic_stock"
@@ -92,11 +91,11 @@
                 android:id="@+id/price_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
                 android:contentDescription="@string/price_icon_desc"
                 android:src="@drawable/ic_price"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/prescription_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stock_icon_image" />
 
@@ -111,6 +110,30 @@
                 app:layout_constraintTop_toTopOf="@id/price_icon"
                 app:priceText="@{medicine.price}"
                 tools:text="15000 تومان" />
+
+            <ImageView
+                android:id="@+id/prescription_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/prescription_icon_desc"
+                android:src="@drawable/ic_prescription"
+                app:layout_constraintBottom_toTopOf="@+id/medicine_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_icon" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/prescription_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/prescription_icon"
+                app:layout_constraintEnd_toStartOf="@id/prescription_icon"
+                app:layout_constraintTop_toTopOf="@id/prescription_icon"
+                app:needPrescription="@{medicine.need_dr}"
+                tools:text="بدون نیاز به نسخه" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

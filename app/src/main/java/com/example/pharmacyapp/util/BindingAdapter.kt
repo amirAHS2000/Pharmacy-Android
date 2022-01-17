@@ -12,7 +12,6 @@ import com.example.pharmacyapp.R
 import com.example.pharmacyapp.adapter.*
 import com.example.pharmacyapp.model.Category
 import com.example.pharmacyapp.model.Medicine
-import com.example.pharmacyapp.model.NonMedicine
 import com.example.pharmacyapp.model.Photo
 import com.google.android.material.textview.MaterialTextView
 
@@ -28,21 +27,9 @@ fun bindRecyclerViewMedicine(recyclerView: RecyclerView, data: List<Medicine>?) 
     adapter.submitList(data)
 }
 
-@BindingAdapter("listDataNonMedicine")
-fun bindRecyclerViewNonMedicine(recyclerView: RecyclerView, data: List<NonMedicine>?) {
-    val adapter = recyclerView.adapter as NonMedicineAdapter
-    adapter.submitList(data)
-}
-
 @BindingAdapter("listDataVerticalMedicine")
 fun bindRecyclerViewVerticalMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
     val adapter = recyclerView.adapter as MedicineVerticalAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("listDataVerticalNonMedicine")
-fun bindRecyclerViewVerticalNonMedicine(recyclerView: RecyclerView, data: List<NonMedicine>?) {
-    val adapter = recyclerView.adapter as NonMedicineVerticalAdapter
     adapter.submitList(data)
 }
 
@@ -78,6 +65,17 @@ fun bindStockTextView(textView: MaterialTextView, stock: Int) {
     } else {
         textView.text = "موجود در انبار"
         textView.setTextColor(Color.GREEN)
+    }
+}
+
+@BindingAdapter("needPrescription")
+fun bindNeedPrescription(textView: MaterialTextView, need_dr: Boolean) {
+    if (need_dr) {
+        textView.text = "بدون نیاز به نسخه پزشک"
+        textView.setTextColor(Color.GREEN)
+    } else {
+        textView.text = "نیازمند نسخه پزشک"
+        textView.setTextColor(Color.RED)
     }
 }
 
