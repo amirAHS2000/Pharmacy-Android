@@ -47,6 +47,10 @@ class ProductFragment : Fragment() {
         }.attach()
         //---------------------------------------------------------------------//
 
+        binding.productToolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
         return binding.root
     }
 }

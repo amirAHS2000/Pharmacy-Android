@@ -25,7 +25,7 @@ class MedicineFragment : Fragment() {
     private lateinit var binding: FragmentMedicinesBinding
 //    private lateinit var viewModel: MedicineViewModel
 
-    private val viewModel : MedicineViewModel by viewModels()
+    private val viewModel: MedicineViewModel by viewModels()
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -54,6 +54,10 @@ class MedicineFragment : Fragment() {
                 viewModel.onMedicineNavigated()
             }
         })
+
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
 
         return binding.root
     }

@@ -24,8 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/home_menu"
-            app:title="Store"
-            app:titleTextColor="@color/white" />
+            app:title="فروشگاه" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
@@ -44,7 +43,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/medicine_category_header"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/header_padding"
                     app:layout_constraintBottom_toTopOf="@+id/medicine_categories_list"
@@ -94,7 +93,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/medicine_categories_list"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
@@ -107,7 +106,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/medicine_top_sellers_header"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:padding="@dimen/header_padding"
@@ -157,7 +156,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/medicine_top_sellers_list"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
@@ -170,7 +169,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/non_meds_category_header"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:padding="@dimen/header_padding"
@@ -220,7 +219,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/non_meds_category_list"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
@@ -233,7 +232,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/non_meds_top_sellers_header"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:padding="@dimen/header_padding"
@@ -283,7 +282,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/non_meds_top_sellers_list"
-                    android:layout_width="411dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rv_margin_home"
                     android:orientation="horizontal"
