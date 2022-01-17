@@ -1,6 +1,7 @@
 package com.example.pharmacyapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -23,5 +24,23 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.bottomNavigation
         val navController = findNavController(R.id.myNavHostFragment)
         navView.setupWithNavController(navController)
+
+        //for hiding bottom navigation in other fragments
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.homeFragment -> showBottomNavigation()
+                R.id.storeFragment -> showBottomNavigation()
+                R.id.profileFragment -> showBottomNavigation()
+                else -> hideBottomNavigation()
+            }
+        }
+    }
+
+    private fun showBottomNavigation() {
+        binding.bottomNavigation.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNavigation() {
+        binding.bottomNavigation.visibility = View.GONE
     }
 }
