@@ -16,14 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-//    private lateinit var viewModel: ProfileViewModel
 
     private val viewModel: ProfileViewModel by viewModels()
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        viewModel = ViewModelProvider(requireActivity())[ProfileViewModel::class.java]
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

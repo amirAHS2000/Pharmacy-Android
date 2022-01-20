@@ -1,7 +1,7 @@
 package com.example.pharmacyapp.util.clicklistener
 
-import com.example.pharmacyapp.model.Category
+import com.example.pharmacyapp.model.category.CategoriesResult
 
 class CategoryListener(val clickListener: (categoryID: Int) -> Unit) {
-    fun onClick(category: Category) = clickListener(category.id)
+    fun onClick(category: CategoriesResult) = clickListener(category.category.id)
 }

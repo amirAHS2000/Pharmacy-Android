@@ -7,7 +7,7 @@
 
         <variable
             name="category"
-            type="com.example.pharmacyapp.model.Category" />
+            type="com.example.pharmacyapp.model.category.CategoriesResult" />
 
         <variable
             name="clickListener"
@@ -34,7 +34,7 @@
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/category_list_item_description_text"
                 android:src="@drawable/ic_profile"
-                app:imageUrl="@{category.imageUri}"
+                app:imageUrl="@{category.image}"
                 app:layout_constraintBottom_toTopOf="@+id/materialTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="@{category.name}"
+                android:text="@{category.category.name}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"

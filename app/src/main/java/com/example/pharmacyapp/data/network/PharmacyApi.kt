@@ -1,12 +1,16 @@
 package com.example.pharmacyapp.data.network
 
 import com.example.pharmacyapp.model.*
+import com.example.pharmacyapp.model.category.Category
+import com.example.pharmacyapp.model.category.GetAllCategoryResponse
+import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
+import com.example.pharmacyapp.model.medicine.GetMedicineResponse
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface PharmacyApi {
+
+    //------------------------------------sign-up and login (prepare)--------------------------------//
     //sign-up and login (prepare)
     @POST("api/login/patient")
     suspend fun login(
@@ -22,19 +26,6 @@ interface PharmacyApi {
         @Query("password") password: String,
         @Query("type") type: String,
     ): Response<LoginResponse>
-
-    //get category and medicine (home)
-    @GET("api/")
-    suspend fun getMedicine(
-        @Query("medName") medicineName: String,
-    ): Response<List<Medicine>>
-
-    @GET("api/")
-    suspend fun getCategory(): Response<List<Category>>
-
-    //get user information (profile)
-    @GET("api/")
-    suspend fun getUserInfo(): Response<User>
 
     @POST("api/user/findPatient")
     suspend fun getUserInfoByPhone(
@@ -57,4 +48,47 @@ interface PharmacyApi {
         @Query("id") id: Int,
         @Query("password") password: String,
     ): Response<UserResponse>
+    //------------------------------------sign-up and login (prepare)--------------------------------//
+
+    //------------------------------------medicines and categories-----------------------------------//
+    //get all categories
+    @GET("api/categories")
+    suspend fun getAllCategories(
+        @Header("Authorization") token: String
+    ): Response<GetAllCategoryResponse>
+
+    //get medicines in special category
+    @GET("api/categories/meds/{id}")
+    suspend fun getMedsInCategory(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Response<GetMedicinesInCategoryResponse>
+
+    //get all information of special medicine
+    @GET("api/meds/allInfo/{id}")
+    suspend fun getAllInfoOfMed(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Response<GetMedicineResponse>
+
+    //get all top sellers med
+    @GET("api/med")
+    suspend fun getMedsTopSeller(
+        @Header("Authorization") token: String
+    ): Response<GetMedicinesInCategoryResponse>
+
+    //get all top sellers non med
+    @GET("api/med")
+    suspend fun getNonMedTopSellers(
+        @Header("Authorization") token: String
+    ): Response<GetMedicinesInCategoryResponse>
+    //------------------------------------medicines and categories-----------------------------------//
+
+    //------------------------------------profile and user information-------------------------------//
+    //get user information (profile)
+    @GET("api/")
+    suspend fun getUserInfo(): Response<User>
+
+    //------------------------------------profile and user information-------------------------------//
+
 }

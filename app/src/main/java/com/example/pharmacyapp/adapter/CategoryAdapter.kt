@@ -5,17 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pharmacyapp.databinding.CategoryListItemBinding
-import com.example.pharmacyapp.model.Category
+import com.example.pharmacyapp.model.category.CategoriesResult
+import com.example.pharmacyapp.model.category.Category
 import com.example.pharmacyapp.util.clicklistener.CategoryListener
 import com.example.pharmacyapp.util.diffcallback.CategoryDiffCallback
 
 class CategoryAdapter(private val clickListener: CategoryListener) :
-    ListAdapter<Category, CategoryAdapter.ViewHolder>(CategoryDiffCallback()) {
+    ListAdapter<CategoriesResult, CategoryAdapter.ViewHolder>(CategoryDiffCallback()) {
     class ViewHolder private constructor(
         private val binding: CategoryListItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            result: Category?,
+            result: CategoriesResult?,
             clickListener: CategoryListener,
         ) {
             binding.category = result

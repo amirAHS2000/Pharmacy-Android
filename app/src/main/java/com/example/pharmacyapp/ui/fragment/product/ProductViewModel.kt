@@ -2,12 +2,16 @@ package com.example.pharmacyapp.ui.fragment.product
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.*
 import com.example.pharmacyapp.data.Repository
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.model.Photo
+import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.util.NetworkResult
+import com.example.pharmacyapp.util.handle
+import com.example.pharmacyapp.util.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,41 +21,32 @@ class ProductViewModel @Inject constructor(
     private val state: SavedStateHandle
 ) : AndroidViewModel(application) {
 
-    //test
+    private var medicineId : Int? = null
+
     init {
-        val productId: Int? = state.get<Int>("productId")
-        Log.i("testArgs", "$productId")
+       medicineId = state.get<Int>("productId")
     }
 
+    private val _medicineResponse = MutableLiveData<NetworkResult<GetMedicineResponse>>()
+    val medicineResponse: LiveData<NetworkResult<GetMedicineResponse>>
+        get() = _medicineResponse
 
-    val medicine = Medicine(
-        id = 9,
-        name = "دارو 9",
-        imageUri = "",
-        price = 15000,
-        stock = 10,
-        company = "ایزان دارو",
-        usage = "بیماری های قلبی",
-        keeping = "در دمای معمولی دور از نور خورشید",
-        guide = "با توجه به نسخه پزشک مصرف شود",
-        need_dr = false,
-        images = listOf<Photo>(
-            Photo(
-                description = "",
-                id = 1,
-                url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-            ),
-            Photo(
-                description = "",
-                id = 2,
-                url = "https://developer.android.com/images/social/android-developers.png"
-            ),
-            Photo(
-                description = "",
-                id = 3,
-                url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-            )
-        )
-    )
+    fun getMedicine() = viewModelScope.launch {
+        getMedicineSafeCall(medicineId!!)
+    }
 
+    private suspend fun getMedicineSafeCall(medicineId: Int) {
+        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+        _medicineResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                val response = repository.getAllInfoOfMed(token, medicineId)
+                _medicineResponse.value = response.handle()
+            } catch (e: Exception) {
+                _medicineResponse.value = NetworkResult.Error("Medicine Not Found.")
+            }
+        } else {
+            _medicineResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
 }

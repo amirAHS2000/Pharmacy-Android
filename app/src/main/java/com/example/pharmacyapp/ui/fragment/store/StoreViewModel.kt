@@ -4,11 +4,18 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
-import com.example.pharmacyapp.model.Category
+import com.example.pharmacyapp.model.category.Category
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.model.Photo
+import com.example.pharmacyapp.model.category.GetAllCategoryResponse
+import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
+import com.example.pharmacyapp.util.NetworkResult
+import com.example.pharmacyapp.util.handle
+import com.example.pharmacyapp.util.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -56,577 +63,76 @@ class StoreViewModel @Inject constructor(
         _navigateToProduct.value = null
     }
 
-    val medicineCategory = listOf<Category>(
-        Category(
-            id = 1,
-            name = "c1",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-        ),
-        Category(id = 2, name = "c2", imageUri = ""),
-        Category(id = 3, name = "c3", imageUri = ""),
-        Category(
-            id = 4,
-            name = "c4",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-        ),
-        Category(id = 5, name = "c5", imageUri = ""),
-        Category(id = 6, name = "c6", imageUri = ""),
-        Category(id = 7, name = "c7", imageUri = ""),
-        Category(
-            id = 8,
-            name = "c8",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-        ),
-        Category(id = 9, name = "c9", imageUri = "")
-    )
+    //---------------------categories and medicines--------------------//
+    private val _categoriesResponse = MutableLiveData<NetworkResult<GetAllCategoryResponse>>()
+    val categories: LiveData<NetworkResult<GetAllCategoryResponse>>
+        get() = _categoriesResponse
 
-    val nonMedicineCategory = listOf<Category>(
-        Category(
-            id = 1,
-            name = "c1",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-        ),
-        Category(id = 2, name = "c2", imageUri = ""),
-        Category(id = 3, name = "c3", imageUri = ""),
-        Category(
-            id = 4,
-            name = "c4",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-        ),
-        Category(id = 5, name = "c5", imageUri = ""),
-        Category(id = 6, name = "c6", imageUri = ""),
-        Category(id = 7, name = "c7", imageUri = ""),
-        Category(
-            id = 8,
-            name = "c8",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-        ),
-        Category(id = 9, name = "c9", imageUri = "")
-    )
+    private val _medicineTopSellersResponse =
+        MutableLiveData<NetworkResult<GetMedicinesInCategoryResponse>>()
+    val medicineTopSellers: LiveData<NetworkResult<GetMedicinesInCategoryResponse>>
+        get() = _medicineTopSellersResponse
 
-    val medicineTopSellers = listOf<Medicine>(
-        Medicine(
-            id = 1,
-            name = "دارو 1",
-            imageUri = "",
-            price = 15000,
-            stock = 0,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 2,
-            name = "دارو 2",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 3,
-            name = "دارو 3",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 4,
-            name = "دارو 4",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 5,
-            name = "دارو 5",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 6,
-            name = "دارو 6",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 7,
-            name = "دارو 7",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 8,
-            name = "دارو 8",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png",
-            price = 15000,
-            stock = 10, company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 9,
-            name = "دارو 9",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = true,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        )
-    )
+    private val _nonMedicineTopSellersResponse =
+        MutableLiveData<NetworkResult<GetMedicinesInCategoryResponse>>()
+    val nonMedicineTopSellers: LiveData<NetworkResult<GetMedicinesInCategoryResponse>>
+        get() = _nonMedicineTopSellersResponse
 
-    val nonMedicineTopSellers = listOf<Medicine>(
-        Medicine(
-            id = 1,
-            name = "دارو 1",
-            imageUri = "",
-            price = 15000,
-            stock = 0,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 2,
-            name = "دارو 2",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 3,
-            name = "دارو 3",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 4,
-            name = "دارو 4",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 5,
-            name = "دارو 5",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 6,
-            name = "دارو 6",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 7,
-            name = "دارو 7",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 8,
-            name = "دارو 8",
-            imageUri = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png",
-            price = 15000,
-            stock = 10, company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        ),
-        Medicine(
-            id = 9,
-            name = "دارو 9",
-            imageUri = "",
-            price = 15000,
-            stock = 10,
-            company = "ایزان دارو",
-            usage = "بیماری های قلبی",
-            keeping = "در دمای معمولی دور از نور خورشید",
-            guide = "با توجه به نسخه پزشک مصرف شود",
-            need_dr = false,
-            images = listOf<Photo>(
-                Photo(
-                    description = "",
-                    id = 1,
-                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/1200px-Android_logo_2019_%28stacked%29.svg.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 2,
-                    url = "https://developer.android.com/images/social/android-developers.png"
-                ),
-                Photo(
-                    description = "",
-                    id = 3,
-                    url = "https://www.itsfoss.net/wp-content/uploads/2021/10/Android.jpg"
-                )
-            )
-        )
-    )
+
+    fun getCategories() = viewModelScope.launch {
+        getCategoriesSafeCall()
+    }
+
+    private suspend fun getCategoriesSafeCall() {
+        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+        _categoriesResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                val response = repository.getCategories(token)
+                _categoriesResponse.value = response.handle()
+            } catch (e: Exception) {
+                _categoriesResponse.value = NetworkResult.Error("Medicine Not Found.")
+            }
+        } else {
+            _categoriesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+
+    fun getMedicineTopSellers() = viewModelScope.launch {
+        getMedicineTopSellersSafeCall()
+    }
+
+    private suspend fun getMedicineTopSellersSafeCall() {
+        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+        _medicineTopSellersResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                val response = repository.getMedTopSellers(token)
+                _medicineTopSellersResponse.value = response.handle()
+            } catch (e: Exception) {
+                _medicineTopSellersResponse.value = NetworkResult.Error("Medicine Not Found.")
+            }
+        } else {
+            _medicineTopSellersResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+
+    fun getNonMedicineTopSellers() = viewModelScope.launch {
+        getNonMedicineTopSellersSafeCall()
+    }
+
+    private suspend fun getNonMedicineTopSellersSafeCall() {
+        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+        _nonMedicineTopSellersResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                val response = repository.getNonMedTopSellers(token)
+                _nonMedicineTopSellersResponse.value = response.handle()
+            } catch (e: Exception) {
+                _nonMedicineTopSellersResponse.value = NetworkResult.Error("Medicine Not Found.")
+            }
+        } else {
+            _nonMedicineTopSellersResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
 }

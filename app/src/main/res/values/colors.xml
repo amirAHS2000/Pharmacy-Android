@@ -20,6 +20,9 @@
     <color name="rv_row_start_color">#C9FFFF</color>
     <color name="rv_row_end_color">#74F3F3</color>
 
+    <!-- shimmer background-->
+    <color name="shimmer_background">#dddddd</color>
+
     <!--  theme colors  -->
     <color name="primaryColor">#05dfd7</color>
     <color name="primaryLightColor">#69ffff</color>

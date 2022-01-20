@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_back_button"
-            app:title="@string/bottom_navigation_profile" />
+            app:title="پروفایل" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header_background"
@@ -57,7 +57,7 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Linus Torvalds"
+                    android:text="نام کاربری"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +123,7 @@
                             android:id="@+id/sells_box_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="sells box"
+                            android:text="@string/user_information_text"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +159,7 @@
                             android:id="@+id/sells_box_text2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="sells box"
+                            android:text="@string/cart_text"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -195,7 +195,7 @@
                             android:id="@+id/sells_box_text3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="sells box"
+                            android:text="ارتباط با ما"
                             android:textSize="20sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

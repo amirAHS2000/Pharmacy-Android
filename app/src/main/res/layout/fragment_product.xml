@@ -7,11 +7,12 @@
 
         <variable
             name="medicine"
-            type="com.example.pharmacyapp.model.Medicine" />
+            type="com.example.pharmacyapp.model.medicine.FullInfoMedModel" />
 
         <variable
             name="viewModel"
             type="com.example.pharmacyapp.ui.fragment.product.ProductViewModel" />
+
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -38,29 +39,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_toolbar">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager"
+            <ImageView
+                android:id="@+id/medicine_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:imageViewPagerData="@{medicine.images}"
+                app:imageUrl="@{medicine.image}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/view_pager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:tabBackground="@drawable/tab_pager_selector"
-                app:tabGravity="center"
-                app:tabIndicatorHeight="0dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+            <!--            <androidx.viewpager2.widget.ViewPager2-->
+            <!--                android:id="@+id/view_pager"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                app:imageViewPagerData="@{viewModel.medicineResponse.data.result.pharm.name}"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--            <com.google.android.material.tabs.TabLayout-->
+            <!--                android:id="@+id/tab_layout"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="bottom"-->
+            <!--                android:background="@android:color/transparent"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/view_pager"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:tabBackground="@drawable/tab_pager_selector"-->
+            <!--                app:tabGravity="center"-->
+            <!--                app:tabIndicatorHeight="0dp"-->
+            <!--                tools:ignore="SpeakableTextPresentCheck" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -100,7 +111,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@{medicine.name}"
+                            android:text="@{medicine.pharm.name}"
                             android:textColor="@color/black"
                             android:textSize="25sp"
                             app:layout_constraintBottom_toTopOf="@+id/price_text_title"
@@ -131,7 +142,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/price_text_title"
                             app:layout_constraintEnd_toStartOf="@id/price_text_title"
                             app:layout_constraintTop_toTopOf="@id/price_text_title"
-                            app:priceText="@{medicine.price}"
+                            app:priceText="@{medicine.med.price}"
                             tools:text="12000 تومان" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -151,7 +162,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dp"
-                            android:text="@{medicine.company}"
+                            android:text="@{medicine.company.name}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@id/company_name_title"
                             app:layout_constraintEnd_toStartOf="@id/company_name_title"
@@ -180,7 +191,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/buying_condition_title"
                             app:layout_constraintEnd_toStartOf="@id/buying_condition_title"
                             app:layout_constraintTop_toTopOf="@id/buying_condition_title"
-                            app:needPrescription="@{medicine.need_dr}"
+                            app:needPrescription="@{medicine.pharm.need_dr}"
                             tools:text="بدون نیاز به نسخه پزشک" />
 
 
@@ -217,7 +228,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="@{medicine.keeping}"
+                            android:text="@{medicine.pharm.keeping}"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -257,7 +268,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="@{medicine.usage}"
+                            android:text="@{medicine.pharm.usage}"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -297,7 +308,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="@{medicine.guide}"
+                            android:text="@{medicine.pharm.guide}"
                             android:textSize="16sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -315,8 +326,8 @@
             android:id="@+id/add_to_card_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:elevation="4dp"
             android:background="@color/secondaryColor"
+            android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

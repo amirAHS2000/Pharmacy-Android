@@ -2,12 +2,18 @@ package com.example.pharmacyapp.data
 
 import com.example.pharmacyapp.data.network.PharmacyApi
 import com.example.pharmacyapp.model.*
+import com.example.pharmacyapp.model.category.Category
+import com.example.pharmacyapp.model.category.GetAllCategoryResponse
+import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
+import com.example.pharmacyapp.model.medicine.GetMedicineResponse
 import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
     private val pharmacyApi: PharmacyApi,
 ) {
+
+    //----------------------------------------PREPARE------------------------------------------------//
     suspend fun login(phoneNumber: String, password: String): Response<LoginResponse> {
         return pharmacyApi.login(phoneNumber, password)
     }
@@ -30,26 +36,14 @@ class RemoteDataSource @Inject constructor(
         insuranceNumber: String?,
         insuranceId: Int?,
     ): Response<CreatePatientResponse> {
-        return pharmacyApi.createPatient(firstName,
+        return pharmacyApi.createPatient(
+            firstName,
             lastName,
             nationalNumber,
             phone,
             insuranceNumber,
-            insuranceId)
-    }
-
-    //get data like medicines - categories
-    suspend fun getMedicine(medName: String): Response<List<Medicine>> {
-        return pharmacyApi.getMedicine(medName)
-    }
-
-    suspend fun getCategory(): Response<List<Category>> {
-        return pharmacyApi.getCategory()
-    }
-
-    //get user information
-    suspend fun getUserInfo(): Response<User> {
-        return pharmacyApi.getUserInfo()
+            insuranceId
+        )
     }
 
     suspend fun findUserByPhone(phone: String, nationalNumber: String): Response<UserResponse> {
@@ -59,4 +53,45 @@ class RemoteDataSource @Inject constructor(
     suspend fun resetPassword(id: Int, password: String): Response<UserResponse> {
         return pharmacyApi.resetPassword(id, password)
     }
+
+    //----------------------------------------PREPARE------------------------------------------------//
+
+    //----------------------------------------MEDICINES AND CATEGORY---------------------------------//
+    //get all categories
+    suspend fun getCategories(token: String): Response<GetAllCategoryResponse> {
+        return pharmacyApi.getAllCategories(token)
+    }
+
+    //get medicines in special category
+    suspend fun getMedsInCategory(
+        token: String,
+        categoryId: Int
+    ): Response<GetMedicinesInCategoryResponse> {
+        return pharmacyApi.getMedsInCategory(token, categoryId)
+    }
+
+    //get all information of special medicine
+    suspend fun getAllInfoOfMed(token: String, medicineId: Int): Response<GetMedicineResponse> {
+        return pharmacyApi.getAllInfoOfMed(token, medicineId)
+    }
+
+    //get all top sellers med
+    suspend fun getMedTopSeller(token: String): Response<GetMedicinesInCategoryResponse> {
+        return pharmacyApi.getMedsTopSeller(token)
+    }
+
+    //get all top sellers non med
+    suspend fun getNonMedTopSellers(token: String): Response<GetMedicinesInCategoryResponse> {
+        return pharmacyApi.getNonMedTopSellers(token)
+    }
+    //----------------------------------------MEDICINES AND CATEGORY---------------------------------//
+
+    //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//
+
+    //get user information
+    suspend fun getUserInfo(): Response<User> {
+        return pharmacyApi.getUserInfo()
+    }
+
+    //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//
 }

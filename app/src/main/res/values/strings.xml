@@ -74,4 +74,6 @@ Prescientific forms of medicine are now known as traditional medicine or folk me
     <string name="medicine_name_text_title">medicine name</string>
     <string name="prescription_icon_desc">prescription icon desc</string>
     <string name="add_to_card_text">اضافه به سبد خرید</string>
+    <string name="user_information_text">اطلاعات حساب کاربری</string>
+    <string name="cart_text">سبد خرید</string>
 </resources>

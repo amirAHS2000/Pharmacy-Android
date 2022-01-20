@@ -6,17 +6,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pharmacyapp.databinding.MedicineListItemBinding
 import com.example.pharmacyapp.model.Medicine
+import com.example.pharmacyapp.model.category.MedicineInCategoryModel
 import com.example.pharmacyapp.util.clicklistener.MedicineListener
 import com.example.pharmacyapp.util.diffcallback.MedicineDiffCallback
 
 class MedicineAdapter(private val clickListener: MedicineListener) :
-    ListAdapter<Medicine, MedicineAdapter.ViewHolder>(MedicineDiffCallback()) {
+    ListAdapter<MedicineInCategoryModel, MedicineAdapter.ViewHolder>(MedicineDiffCallback()) {
 
     class ViewHolder private constructor(
         private val binding: MedicineListItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            result: Medicine?,
+            result: MedicineInCategoryModel?,
             clickListener: MedicineListener
         ) {
             binding.medicine = result

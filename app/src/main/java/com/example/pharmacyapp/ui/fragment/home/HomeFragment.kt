@@ -16,14 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-//    private lateinit var viewModel: HomeViewModel
 
     private val viewModel: HomeViewModel by viewModels()
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -7,7 +7,7 @@
 
         <variable
             name="medicine"
-            type="com.example.pharmacyapp.model.Medicine" />
+            type="com.example.pharmacyapp.model.category.MedicineInCategoryModel" />
 
         <variable
             name="clickListener"
@@ -41,7 +41,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/row_item_image_desc"
                     android:scaleType="fitXY"
-                    app:imageUrl="@{medicine.imageUri}"
+                    app:imageUrl="@{medicine.image}"
                     tools:src="@drawable/background_item_first" />
 
             </androidx.cardview.widget.CardView>
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
-                android:text="@{medicine.name}"
+                android:text="@{medicine.pharm.name}"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/stock_icon_image"
@@ -84,7 +84,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/stock_icon_image"
                 app:layout_constraintEnd_toStartOf="@id/stock_icon_image"
                 app:layout_constraintTop_toTopOf="@id/stock_icon_image"
-                app:stockText="@{medicine.stock}"
+                app:stockText="@{medicine.med.inv}"
                 tools:text="موجود در انبار" />
 
             <ImageView
@@ -108,7 +108,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/price_icon"
                 app:layout_constraintEnd_toStartOf="@id/price_icon"
                 app:layout_constraintTop_toTopOf="@id/price_icon"
-                app:priceText="@{medicine.price}"
+                app:priceText="@{medicine.med.price}"
                 tools:text="15000 تومان" />
 
             <ImageView
@@ -132,7 +132,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/prescription_icon"
                 app:layout_constraintEnd_toStartOf="@id/prescription_icon"
                 app:layout_constraintTop_toTopOf="@id/prescription_icon"
-                app:needPrescription="@{medicine.need_dr}"
+                app:needPrescription="@{medicine.pharm.need_dr}"
                 tools:text="بدون نیاز به نسخه" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

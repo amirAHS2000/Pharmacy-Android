@@ -10,28 +10,28 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.adapter.*
-import com.example.pharmacyapp.model.Category
+import com.example.pharmacyapp.model.category.Category
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.model.Photo
 import com.google.android.material.textview.MaterialTextView
 
-@BindingAdapter("listDataCategory")
-fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: List<Category>?) {
-    val adapter = recyclerView.adapter as CategoryAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("listDataCategory")
+//fun bindRecyclerViewCategory(recyclerView: RecyclerView, data: List<Category>?) {
+//    val adapter = recyclerView.adapter as CategoryAdapter
+//    adapter.submitList(data)
+//}
+//
+//@BindingAdapter("listDataMedicine")
+//fun bindRecyclerViewMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
+//    val adapter = recyclerView.adapter as MedicineAdapter
+//    adapter.submitList(data)
+//}
 
-@BindingAdapter("listDataMedicine")
-fun bindRecyclerViewMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
-    val adapter = recyclerView.adapter as MedicineAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("listDataVerticalMedicine")
-fun bindRecyclerViewVerticalMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
-    val adapter = recyclerView.adapter as MedicineVerticalAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("listDataVerticalMedicine")
+//fun bindRecyclerViewVerticalMedicine(recyclerView: RecyclerView, data: List<Medicine>?) {
+//    val adapter = recyclerView.adapter as MedicineVerticalAdapter
+//    adapter.submitList(data)
+//}
 
 @BindingAdapter("imageUrl")
 fun bindImage(
@@ -79,8 +79,8 @@ fun bindNeedPrescription(textView: MaterialTextView, need_dr: Boolean) {
     }
 }
 
-@BindingAdapter("imageViewPagerData")
-fun bindImageViewPager(viewPager2: ViewPager2, data: List<Photo>?) {
-    val adapter = viewPager2.adapter as ImageViewPagerAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("imageViewPagerData")
+//fun bindImageViewPager(viewPager2: ViewPager2, data: List<Photo>?) {
+//    val adapter = viewPager2.adapter as ImageViewPagerAdapter
+//    adapter.submitList(data)
+//}

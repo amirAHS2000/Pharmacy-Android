@@ -19,26 +19,6 @@ class HomeViewModel @Inject constructor(
     application: Application,
 ) : AndroidViewModel(application) {
 
-    var medsResponse: MutableLiveData<NetworkResult<List<Medicine>>> = MutableLiveData()
-
-    fun getMedicine(medName: String) = viewModelScope.launch {
-        getMedicineSafeCall(medName)
-    }
-
-    private suspend fun getMedicineSafeCall(medName: String) {
-        medsResponse.value = NetworkResult.Loading()
-        if (hasInternetConnection(getApplication())) {
-            try {
-                val response = repository.remote.getMedicine(medName)
-                medsResponse.value = response.handle()
-            } catch (e: Exception) {
-                medsResponse.value = NetworkResult.Error("Medicine Not Found.")
-            }
-        } else {
-            medsResponse.value = NetworkResult.Error("No Internet Connection.")
-        }
-    }
-
 //    private fun handleMedicineResponse(response: Response<List<Medicine>>): NetworkResult<List<Medicine>>? {
 //        when {
 //            response.message().toString().contains("timeout") -> {

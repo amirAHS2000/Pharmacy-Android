@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rv_row_item_background">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/medicine_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="20dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/shimmer_background"
+                android:contentDescription="@string/row_item_image_desc"
+                android:scaleType="fitXY" />
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/medicine_name"
+            android:layout_width="140dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/shimmer_background"
+            app:layout_constraintBottom_toTopOf="@+id/stock_icon_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/medicine_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <ImageView
+            android:id="@+id/stock_icon_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/stock_icon_desc"
+            android:src="@drawable/ic_stock"
+            app:layout_constraintBottom_toTopOf="@+id/price_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medicine_name" />
+
+        <View
+            android:id="@+id/stock_value"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/shimmer_background"
+            app:layout_constraintBottom_toBottomOf="@id/stock_icon_image"
+            app:layout_constraintEnd_toStartOf="@id/stock_icon_image"
+            app:layout_constraintTop_toTopOf="@id/stock_icon_image" />
+
+        <ImageView
+            android:id="@+id/price_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/price_icon_desc"
+            android:src="@drawable/ic_price"
+            app:layout_constraintBottom_toTopOf="@+id/prescription_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stock_icon_image" />
+
+        <View
+            android:id="@+id/price_text"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/shimmer_background"
+            app:layout_constraintBottom_toBottomOf="@id/price_icon"
+            app:layout_constraintEnd_toStartOf="@id/price_icon"
+            app:layout_constraintTop_toTopOf="@id/price_icon" />
+
+        <ImageView
+            android:id="@+id/prescription_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/prescription_icon_desc"
+            android:src="@drawable/ic_prescription"
+            app:layout_constraintBottom_toTopOf="@+id/medicine_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_icon" />
+
+        <View
+            android:id="@+id/prescription_text"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/shimmer_background"
+            app:layout_constraintBottom_toBottomOf="@id/prescription_icon"
+            app:layout_constraintEnd_toStartOf="@id/prescription_icon"
+            app:layout_constraintTop_toTopOf="@id/prescription_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
