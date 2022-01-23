@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.databinding.FragmentProfileBinding
 import com.example.pharmacyapp.util.NetworkResult
@@ -37,6 +38,9 @@ class ProfileFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        binding.sellsBox2.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_purchaseFragment)
+        }
 
         return binding.root
     }

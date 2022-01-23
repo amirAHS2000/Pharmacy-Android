@@ -26,7 +26,11 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.pharmacyapp.ui.fragment.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productFragment"
         android:name="com.example.pharmacyapp.ui.fragment.product.ProductFragment"
@@ -52,4 +56,8 @@
         android:id="@+id/medicineShowFragment"
         android:name="com.example.pharmacyapp.ui.fragment.home.medshow.MedicineShowFragment"
         android:label="MedicineShowFragment" />
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.example.pharmacyapp.ui.fragment.profile.purchase.PurchaseFragment"
+        android:label="PurchaseFragment" />
 </navigation>
