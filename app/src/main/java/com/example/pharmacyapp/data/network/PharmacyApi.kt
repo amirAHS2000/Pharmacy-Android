@@ -4,7 +4,9 @@ import com.example.pharmacyapp.model.*
 import com.example.pharmacyapp.model.category.Category
 import com.example.pharmacyapp.model.category.GetAllCategoryResponse
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
+import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.model.user.UserInformationResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -57,6 +59,12 @@ interface PharmacyApi {
         @Header("Authorization") token: String
     ): Response<GetAllCategoryResponse>
 
+    //get all medicines
+    @GET("api/meds")
+    suspend fun getAllMedicines(
+        @Header("Authorization") token: String
+    ) : Response<GetAllMedicinesResponse>
+
     //get medicines in special category
     @GET("api/categories/meds/{id}")
     suspend fun getMedsInCategory(
@@ -93,8 +101,10 @@ interface PharmacyApi {
 
     //------------------------------------profile and user information-------------------------------//
     //get user information (profile)
-    @GET("api/")
-    suspend fun getUserInfo(): Response<User>
+    @GET("api/user")
+    suspend fun getUserInfo(
+        @Header("Authorization") token: String
+    ): Response<UserInformationResponse>
 
     //------------------------------------profile and user information-------------------------------//
 

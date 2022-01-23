@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="medicine"
+            type="com.example.pharmacyapp.model.medicine.FullInfoMedModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        app:cardCornerRadius="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rv_row_item_background">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/medicine_image"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/row_item_image_desc"
+                    android:scaleType="fitXY"
+                    app:imageUrl="@{medicine.image}"
+                    tools:src="@drawable/background_item_first" />
+
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/medicine_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="نام دارو : "
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/medicine_image" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/medicine_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="@{medicine.pharm.name}"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/medicine_name_label"
+                app:layout_constraintEnd_toStartOf="@id/medicine_name_label"
+                app:layout_constraintTop_toTopOf="@id/medicine_name_label"
+                tools:text="استامینوفن" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/company_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:text="شرکت سازنده : "
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/medicine_name_label" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="@{medicine.company.name}"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/company_name_label"
+                app:layout_constraintEnd_toStartOf="@id/company_name_label"
+                app:layout_constraintTop_toTopOf="@+id/company_name_label"
+                tools:text="فایزر" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp"
+                android:text="دسته بندی : "
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_name_label" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/category_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="@{medicine.category.name}"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/category_name_label"
+                app:layout_constraintEnd_toStartOf="@id/category_name_label"
+                app:layout_constraintTop_toTopOf="@id/category_name_label"
+                tools:text="آنتی بیوتیک" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

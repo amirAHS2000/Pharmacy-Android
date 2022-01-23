@@ -4,7 +4,9 @@ import com.example.pharmacyapp.model.LoginResponse
 import com.example.pharmacyapp.model.UserResponse
 import com.example.pharmacyapp.model.category.GetAllCategoryResponse
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
+import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.model.user.UserInformationResponse
 import dagger.hilt.android.scopes.ViewModelScoped
 import retrofit2.Response
 import javax.inject.Inject
@@ -76,6 +78,10 @@ class Repository @Inject constructor(
         return remoteDataSource.getCategories(token)
     }
 
+    suspend fun getAllMedicines(token: String): Response<GetAllMedicinesResponse> {
+        return remoteDataSource.getAllMedicines(token)
+    }
+
     suspend fun getMedsInCategory(
         token: String,
         categoryId: Int
@@ -106,6 +112,11 @@ class Repository @Inject constructor(
 
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//
 
+    suspend fun getUserInformation(
+        token: String
+    ): Response<UserInformationResponse> {
+        return remoteDataSource.getUserInfo(token)
+    }
 
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//
 }

@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="user"
+            type="com.example.pharmacyapp.model.user.UserInformation" />
+
+        <variable
             name="viewModel"
             type="com.example.pharmacyapp.ui.fragment.profile.ProfileViewModel" />
     </data>
@@ -57,7 +61,7 @@
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="نام کاربری"
+                    android:text="@{user.first_name + ' ' + user.last_name}"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

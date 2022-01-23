@@ -5,7 +5,9 @@ import com.example.pharmacyapp.model.*
 import com.example.pharmacyapp.model.category.Category
 import com.example.pharmacyapp.model.category.GetAllCategoryResponse
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
+import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.model.user.UserInformationResponse
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -62,6 +64,11 @@ class RemoteDataSource @Inject constructor(
         return pharmacyApi.getAllCategories(token)
     }
 
+    //get all medicines
+    suspend fun getAllMedicines(token: String): Response<GetAllMedicinesResponse> {
+        return pharmacyApi.getAllMedicines(token)
+    }
+
     //get medicines in special category
     suspend fun getMedsInCategory(
         token: String,
@@ -98,8 +105,10 @@ class RemoteDataSource @Inject constructor(
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//
 
     //get user information
-    suspend fun getUserInfo(): Response<User> {
-        return pharmacyApi.getUserInfo()
+    suspend fun getUserInfo(
+        token: String
+    ): Response<UserInformationResponse> {
+        return pharmacyApi.getUserInfo(token)
     }
 
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//
