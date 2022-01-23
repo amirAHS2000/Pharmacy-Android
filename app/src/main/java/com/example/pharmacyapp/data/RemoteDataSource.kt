@@ -84,6 +84,15 @@ class RemoteDataSource @Inject constructor(
     suspend fun getNonMedTopSellers(token: String): Response<GetMedicinesInCategoryResponse> {
         return pharmacyApi.getNonMedTopSellers(token)
     }
+
+    //search medicine by name
+    suspend fun searchMedicine(
+        token: String,
+        medicineName: String
+    ): Response<GetMedicinesInCategoryResponse> {
+        return pharmacyApi.searchMedicine(token, medicineName)
+    }
+
     //----------------------------------------MEDICINES AND CATEGORY---------------------------------//
 
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//

@@ -13,13 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.pharmacyapp.R
 import com.example.pharmacyapp.adapter.*
 import com.example.pharmacyapp.databinding.FragmentStoreBinding
+import com.example.pharmacyapp.ui.fragment.medicines.MedicineFragmentDirections
 import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.clicklistener.CategoryListener
 import com.example.pharmacyapp.util.clicklistener.MedicineListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
+class StoreFragment : Fragment() {
 
     private lateinit var binding: FragmentStoreBinding
 
@@ -27,11 +28,9 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel.getCategories()
         viewModel.getMedicineTopSellers()
         viewModel.getNonMedicineTopSellers()
-
     }
 
     override fun onCreateView(
@@ -43,6 +42,49 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_store, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    viewModel.getSearchResult(query)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "please enter medicine name",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
+
+        binding.searchView.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                binding.medicinesSearchList.visibility = View.GONE
+                binding.horizontalListContainer.visibility = View.VISIBLE
+                return true
+            }
+        })
+
+        binding.medicinesSearchList.adapter =
+            MedicineVerticalAdapter(MedicineListener { medicineId ->
+                viewModel.onProductClicked(medicineId)
+            })
+
+        viewModel.navigateToProduct.observe(viewLifecycleOwner, Observer {
+            it?.let { medicineId ->
+                findNavController().navigate(
+                    StoreFragmentDirections
+                        .actionStoreFragmentToProductFragment(medicineId)
+                )
+                viewModel.onProductNavigated()
+            }
+        })
 
         binding.categoriesList.adapter = CategoryAdapter(CategoryListener { categoryId ->
             viewModel.onMedicineItemClicked(categoryId)
@@ -98,8 +140,8 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
                         binding.categoryListPlaceholder.visibility = View.VISIBLE
                     }
                     is NetworkResult.Error -> {
-                        Toast.makeText(requireContext(), "can't load data", Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(requireContext(), "can't load data", Toast.LENGTH_SHORT)
+//                            .show()
                         // TODO: 1/20/2022 show a message "can't load data"
                         binding.categoryListPlaceholder.visibility = View.VISIBLE
                     }
@@ -112,7 +154,6 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
                             binding.categoriesList.visibility = View.VISIBLE
                             val adapter = binding.categoriesList.adapter as CategoryAdapter
                             adapter.submitList(networkResult.data.result)
-                            Log.i("testCategory", "${networkResult.data.result.size}")
                         }
                     }
                 }
@@ -125,8 +166,8 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
                         binding.medicineListPlaceholder.visibility = View.VISIBLE
                     }
                     is NetworkResult.Error -> {
-                        Toast.makeText(requireContext(), "can't load data", Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(requireContext(), "can't load data", Toast.LENGTH_SHORT)
+//                            .show()
                         // TODO: 1/20/2022 show a message "can't load data"
                         binding.medicineListPlaceholder.visibility = View.VISIBLE
                     }
@@ -151,8 +192,8 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
                         binding.nonMedicineListPlaceholder.visibility = View.VISIBLE
                     }
                     is NetworkResult.Error -> {
-                        Toast.makeText(requireContext(), "can't load data", Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(requireContext(), "can't load data", Toast.LENGTH_SHORT)
+//                            .show()
                         // TODO: 1/20/2022 show a message "can't load data"
                         binding.nonMedicineListPlaceholder.visibility = View.VISIBLE
                     }
@@ -170,32 +211,39 @@ class StoreFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
         })
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        viewModel.searchResultResponse.observe(viewLifecycleOwner, Observer {
+            it?.let { networkResult ->
+                when (networkResult) {
+                    is NetworkResult.Loading -> {
+//                        binding.medicineListPlaceholder.visibility = View.VISIBLE
+                    }
+                    is NetworkResult.Error -> {
+                        Toast.makeText(
+                            requireContext(),
+                            "${networkResult.message}",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        // TODO: 1/20/2022 show a message "can't load data"
+//                        binding.medicineListPlaceholder.visibility = View.VISIBLE
+                    }
+                    is NetworkResult.Success -> {
+                        if (networkResult.data?.result == null) {
+                            // TODO: 1/20/2022 there is no data for showing
+//                            binding.medicineListPlaceholder.visibility = View.VISIBLE
+                        } else {
+//                            binding.medicineListPlaceholder.visibility = View.GONE
+                            binding.horizontalListContainer.visibility = View.GONE
+                            binding.medicinesSearchList.visibility = View.VISIBLE
+                            val adapter =
+                                binding.medicinesSearchList.adapter as MedicineVerticalAdapter
+                            adapter.submitList(networkResult.data.result)
+                        }
+                    }
+                }
+            }
+        })
 
-        inflater.inflate(R.menu.home_menu, menu)
-        val search = menu.findItem(R.id.search_item)
-        val searchView = search.actionView as SearchView
-        searchView.isSubmitButtonEnabled = true
-        searchView.setOnQueryTextListener(this)
-    }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null) {
-            doingSearch(query)
-        }
-        return true
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null) {
-            doingSearch(newText)
-        }
-        return true
-    }
-
-    private fun doingSearch(query: String) {
-        // TODO: 12/22/2021 call function from viewModel that it's do search
     }
 }

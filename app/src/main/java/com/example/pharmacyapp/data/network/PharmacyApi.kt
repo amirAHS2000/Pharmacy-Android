@@ -72,15 +72,22 @@ interface PharmacyApi {
     ): Response<GetMedicineResponse>
 
     //get all top sellers med
-    @GET("api/med")
+    @GET("api/meds/topSell/nd")
     suspend fun getMedsTopSeller(
         @Header("Authorization") token: String
     ): Response<GetMedicinesInCategoryResponse>
 
     //get all top sellers non med
-    @GET("api/med")
+    @GET("api/meds/topSell/dnd")
     suspend fun getNonMedTopSellers(
         @Header("Authorization") token: String
+    ): Response<GetMedicinesInCategoryResponse>
+
+    //search medicine by name
+    @POST("api/meds/search")
+    suspend fun searchMedicine(
+        @Header("Authorization") token: String,
+        @Query("name") medicineName: String
     ): Response<GetMedicinesInCategoryResponse>
     //------------------------------------medicines and categories-----------------------------------//
 

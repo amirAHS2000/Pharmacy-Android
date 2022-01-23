@@ -78,6 +78,31 @@ class StoreViewModel @Inject constructor(
     val nonMedicineTopSellers: LiveData<NetworkResult<GetMedicinesInCategoryResponse>>
         get() = _nonMedicineTopSellersResponse
 
+    private val _searchResultResponse =
+        MutableLiveData<NetworkResult<GetMedicinesInCategoryResponse>>()
+    val searchResultResponse: LiveData<NetworkResult<GetMedicinesInCategoryResponse>>
+        get() = _searchResultResponse
+
+
+    fun getSearchResult(medicineName: String) = viewModelScope.launch {
+        getSearchResultSafeCall(medicineName)
+
+    }
+
+    private suspend fun getSearchResultSafeCall(medicineName: String) {
+        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+        _searchResultResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                val response = repository.searchMedicine(token, medicineName)
+                _searchResultResponse.value = response.handle()
+            } catch (e: Exception) {
+                _searchResultResponse.value = NetworkResult.Error("Medicine Not Found.")
+            }
+        } else {
+            _searchResultResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
 
     fun getCategories() = viewModelScope.launch {
         getCategoriesSafeCall()

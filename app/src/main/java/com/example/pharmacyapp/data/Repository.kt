@@ -94,6 +94,13 @@ class Repository @Inject constructor(
     suspend fun getNonMedTopSellers(token: String): Response<GetMedicinesInCategoryResponse> {
         return remoteDataSource.getNonMedTopSellers(token)
     }
+
+    suspend fun searchMedicine(
+        token: String,
+        medicineName: String
+    ): Response<GetMedicinesInCategoryResponse> {
+        return remoteDataSource.searchMedicine(token, medicineName)
+    }
     //----------------------------------------MEDICINES AND CATEGORY---------------------------------//
 
 

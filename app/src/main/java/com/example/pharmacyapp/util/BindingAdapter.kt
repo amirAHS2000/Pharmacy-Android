@@ -39,7 +39,7 @@ fun bindImage(
     imgUrl: String?
 ) {
     imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        val imgUri = imgUrl.toUri().buildUpon().scheme("http").build()
         Glide.with(imageView.context)
             .load(imgUri)
             .apply(
