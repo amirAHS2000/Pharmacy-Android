@@ -328,6 +328,7 @@
             android:layout_height="50dp"
             android:background="@color/secondaryLightColor"
             android:elevation="4dp"
+            android:onClick="@{() -> viewModel.addToPrescription(medicine.med.id)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

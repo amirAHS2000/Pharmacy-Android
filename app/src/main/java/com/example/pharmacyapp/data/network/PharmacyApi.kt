@@ -6,6 +6,8 @@ import com.example.pharmacyapp.model.category.GetAllCategoryResponse
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
 import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.model.prescription.CreatePrescriptionResponse
+import com.example.pharmacyapp.model.prescription.PrescriptionContentResponse
 import com.example.pharmacyapp.model.user.UserInformationResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -45,6 +47,13 @@ interface PharmacyApi {
         @Query("ins_id") insuranceId: Int?,
     ): Response<CreatePatientResponse>
 
+    @POST("api/presc")
+    suspend fun createPrescription(
+        @Header("Authorization") token: String,
+        @Query("doctor") doctorName: String,
+        @Query("patient_id") patientId: Int
+    ): Response<CreatePrescriptionResponse>
+
     @POST("api/user/reset")
     suspend fun resetPassword(
         @Query("id") id: Int,
@@ -63,7 +72,7 @@ interface PharmacyApi {
     @GET("api/meds")
     suspend fun getAllMedicines(
         @Header("Authorization") token: String
-    ) : Response<GetAllMedicinesResponse>
+    ): Response<GetAllMedicinesResponse>
 
     //get medicines in special category
     @GET("api/categories/meds/{id}")
@@ -105,6 +114,22 @@ interface PharmacyApi {
     suspend fun getUserInfo(
         @Header("Authorization") token: String
     ): Response<UserInformationResponse>
+
+    //add product to prescription (new prescription content)
+    @POST("api/presc/content")
+    suspend fun addPrescriptionContent(
+        @Header("Authorization") token: String,
+        @Query("presc_id") prescId: Int,
+        @Query("med_id") medId: Int,
+        @Query("ins_buy") insBuy: Boolean = false
+    ): Response<PrescriptionContentResponse>
+
+    //get all medicine in prescription
+    @GET("api/presc/content/{presc_id}")
+    suspend fun getAllMedicineInPresc(
+        @Header("Authorization") token: String,
+        @Path("presc_id") prescId: Int
+    ): Response<GetMedicinesInCategoryResponse>
 
     //------------------------------------profile and user information-------------------------------//
 

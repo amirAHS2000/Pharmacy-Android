@@ -28,6 +28,7 @@ class StoreFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getToken()
         viewModel.getCategories()
         viewModel.getMedicineTopSellers()
         viewModel.getNonMedicineTopSellers()

@@ -29,6 +29,7 @@ class MedicineFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getToken()
         viewModel.getMedicine()
     }
 

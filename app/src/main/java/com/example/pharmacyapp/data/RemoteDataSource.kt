@@ -7,6 +7,8 @@ import com.example.pharmacyapp.model.category.GetAllCategoryResponse
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
 import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.model.prescription.CreatePrescriptionResponse
+import com.example.pharmacyapp.model.prescription.PrescriptionContentResponse
 import com.example.pharmacyapp.model.user.UserInformationResponse
 import retrofit2.Response
 import javax.inject.Inject
@@ -46,6 +48,14 @@ class RemoteDataSource @Inject constructor(
             insuranceNumber,
             insuranceId
         )
+    }
+
+    suspend fun createPrescription(
+        token: String,
+        doctorName: String,
+        patientId: Int
+    ): Response<CreatePrescriptionResponse> {
+        return pharmacyApi.createPrescription(token, doctorName, patientId)
     }
 
     suspend fun findUserByPhone(phone: String, nationalNumber: String): Response<UserResponse> {
@@ -109,6 +119,26 @@ class RemoteDataSource @Inject constructor(
         token: String
     ): Response<UserInformationResponse> {
         return pharmacyApi.getUserInfo(token)
+    }
+
+    //add product to prescription (new prescription content)
+    suspend fun addPrescriptionContent(
+        token: String,
+        prescId: Int,
+        medId: Int,
+        insBuy: Boolean
+    ): Response<PrescriptionContentResponse> {
+        return pharmacyApi.addPrescriptionContent(
+            token, prescId, medId, insBuy
+        )
+    }
+
+    //get all medicine in prescription
+    suspend fun getAllMedicineInPresc(
+        token: String,
+        prescId: Int
+    ): Response<GetMedicinesInCategoryResponse> {
+        return pharmacyApi.getAllMedicineInPresc(token, prescId)
     }
 
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//

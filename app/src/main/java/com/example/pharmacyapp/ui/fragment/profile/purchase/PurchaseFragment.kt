@@ -25,6 +25,7 @@ class PurchaseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getToken()
         viewModel.getProduct()
     }
 

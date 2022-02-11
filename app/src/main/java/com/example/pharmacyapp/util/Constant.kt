@@ -8,6 +8,9 @@ class Constant {
         //datastore preference
         const val PREFERENCE_NAME = "user_data"
         const val PREFERENCE_USER_ID = "user_id"
+        const val PREFERENCE_USER_PRESC_ID = "user_presc_id"
         const val PREFERENCE_USER_TOKEN = "user_token"
+
+        const val prescriptionId : Int = 0
     }
 }

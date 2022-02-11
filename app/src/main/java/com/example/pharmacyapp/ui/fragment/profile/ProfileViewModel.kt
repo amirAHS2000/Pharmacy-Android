@@ -1,11 +1,9 @@
 package com.example.pharmacyapp.ui.fragment.profile
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.pharmacyapp.data.Repository
+import com.example.pharmacyapp.data.UserDataStore
 import com.example.pharmacyapp.model.user.UserInformationResponse
 import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.handle
@@ -28,12 +26,18 @@ class ProfileViewModel @Inject constructor(
         getUserInformationSafeCall()
     }
 
+    private lateinit var userDataStore: UserDataStore
+
+    fun getToken() = viewModelScope.launch {
+        userDataStore = repository.readUserData()
+    }
+
     private suspend fun getUserInformationSafeCall() {
-        val token = "Bearer 255|UyQ4I9RJB7DCYtOhYCQjXRbNrbtQqIbui0BJAlQj"
+//        val token = "Bearer 255|UyQ4I9RJB7DCYtOhYCQjXRbNrbtQqIbui0BJAlQj"
         _userInformationResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.getUserInformation(token)
+                val response = repository.getUserInformation("Bearer " + userDataStore.userToken)
                 _userInformationResponse.value = response.handle()
             } catch (e: Exception) {
                 _userInformationResponse.value = NetworkResult.Error("Medicine Not Found.")

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
 import com.example.pharmacyapp.model.LoginResponse
+import com.example.pharmacyapp.model.prescription.CreatePrescriptionResponse
 import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.handle
 import com.example.pharmacyapp.util.hasInternetConnection
@@ -41,6 +42,10 @@ class LoginViewModel @Inject constructor(
     private var _saveUserState = MutableLiveData<Boolean?>()
     val saveUserState: LiveData<Boolean?>
         get() = _saveUserState
+
+    private val _prescriptionResponse = MutableLiveData<NetworkResult<CreatePrescriptionResponse>>()
+    private val prescriptionResponse: LiveData<NetworkResult<CreatePrescriptionResponse>>
+        get() = _prescriptionResponse
 
     fun onNavigateToMain() {
         _navigateToMain.value = true
@@ -86,12 +91,41 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    private suspend fun createPrescriptionSafeCall(
+        token: String,
+        doctorName: String,
+        patientId: Int
+    ) {
+        _prescriptionResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection(getApplication())) {
+            try {
+                val response =
+                    repository.createPrescription(
+                        token,
+                        doctorName,
+                        patientId
+                    )
+                _prescriptionResponse.value = response.handle()
+            } catch (e: Exception) {
+                _prescriptionResponse.value = NetworkResult.Error("Medicine Not Found.")
+            }
+        } else {
+            _prescriptionResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+
     fun onSaveUser(loginResponse: LoginResponse) {
         val userAndToken = loginResponse.result.first()
         val id = userAndToken.user.id
         val token = userAndToken.token
+        val refId = userAndToken.user.ref_id
         viewModelScope.launch {
             try {
+                createPrescriptionSafeCall(
+                    "Bearer $token",
+                    "stop",
+                    refId
+                )
                 saveUserSafeCall(id, token)
             } catch (e: IOException) {
                 Log.e("DataStore", e.stackTraceToString())

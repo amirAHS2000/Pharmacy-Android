@@ -1,16 +1,19 @@
 package com.example.pharmacyapp.data
 
+import android.app.Application
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_NAME
 import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_USER_ID
+import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_USER_PRESC_ID
 import com.example.pharmacyapp.util.Constant.Companion.PREFERENCE_USER_TOKEN
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
@@ -38,22 +41,28 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         return true
     }
 
-    val readUserData: Flow<UserDataStore> = dataStore.data
-        .catch { exception ->
-            if (exception is IOException) {
-                emit(emptyPreferences())
-            } else {
-                throw exception
-            }
-        }
-        .map { preferences ->
-            val userId = preferences[PreferenceKeys.userIdKey] ?: 0
-            val userToken = preferences[PreferenceKeys.userTokenKey] ?: "none"
-            UserDataStore(
-                userId,
-                userToken
-            )
-        }
+//    val readUserData: Flow<UserDataStore> = dataStore.data
+//        .catch { exception ->
+//            if (exception is IOException) {
+//                emit(emptyPreferences())
+//            } else {
+//                throw exception
+//            }
+//        }
+//        .map { preferences ->
+//            val userId = preferences[PreferenceKeys.userIdKey] ?: 0
+//            val userToken = preferences[PreferenceKeys.userTokenKey] ?: "none"
+//            UserDataStore(
+//                userId,
+//                userToken
+//            )
+//        }
+
+    suspend fun readUserData(): UserDataStore {
+        val userId = dataStore.data.first()[PreferenceKeys.userIdKey]
+        val userToken = dataStore.data.first()[PreferenceKeys.userTokenKey]
+        return UserDataStore(userId!!, userToken!!)
+    }
 }
 
 data class UserDataStore(

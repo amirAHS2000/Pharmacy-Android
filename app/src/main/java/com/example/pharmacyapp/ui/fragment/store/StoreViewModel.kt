@@ -1,11 +1,10 @@
 package com.example.pharmacyapp.ui.fragment.store
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.pharmacyapp.data.Repository
+import com.example.pharmacyapp.data.UserDataStore
 import com.example.pharmacyapp.model.category.Category
 import com.example.pharmacyapp.model.Medicine
 import com.example.pharmacyapp.model.Photo
@@ -15,6 +14,7 @@ import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.handle
 import com.example.pharmacyapp.util.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +23,7 @@ class StoreViewModel @Inject constructor(
     val repository: Repository,
     application: Application,
 ) : AndroidViewModel(application) {
+
 
     //-------------------------navigate to medicines fragment----------------------//
     private val _navigateToMedicine = MutableLiveData<Int?>()
@@ -83,18 +84,23 @@ class StoreViewModel @Inject constructor(
     val searchResultResponse: LiveData<NetworkResult<GetMedicinesInCategoryResponse>>
         get() = _searchResultResponse
 
+    private lateinit var userDataStore: UserDataStore
+
+    fun getToken() = viewModelScope.launch {
+        userDataStore = repository.readUserData()
+    }
 
     fun getSearchResult(medicineName: String) = viewModelScope.launch {
         getSearchResultSafeCall(medicineName)
-
     }
 
     private suspend fun getSearchResultSafeCall(medicineName: String) {
-        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+//        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
         _searchResultResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.searchMedicine(token, medicineName)
+                val response =
+                    repository.searchMedicine("Bearer " + userDataStore.userToken, medicineName)
                 _searchResultResponse.value = response.handle()
             } catch (e: Exception) {
                 _searchResultResponse.value = NetworkResult.Error("Medicine Not Found.")
@@ -109,11 +115,11 @@ class StoreViewModel @Inject constructor(
     }
 
     private suspend fun getCategoriesSafeCall() {
-        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+//        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
         _categoriesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.getCategories(token)
+                val response = repository.getCategories("Bearer " + userDataStore.userToken)
                 _categoriesResponse.value = response.handle()
             } catch (e: Exception) {
                 _categoriesResponse.value = NetworkResult.Error("Medicine Not Found.")
@@ -128,11 +134,11 @@ class StoreViewModel @Inject constructor(
     }
 
     private suspend fun getMedicineTopSellersSafeCall() {
-        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+//        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
         _medicineTopSellersResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.getMedTopSellers(token)
+                val response = repository.getMedTopSellers("Bearer " + userDataStore.userToken)
                 _medicineTopSellersResponse.value = response.handle()
             } catch (e: Exception) {
                 _medicineTopSellersResponse.value = NetworkResult.Error("Medicine Not Found.")
@@ -147,11 +153,11 @@ class StoreViewModel @Inject constructor(
     }
 
     private suspend fun getNonMedicineTopSellersSafeCall() {
-        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+//        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
         _nonMedicineTopSellersResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.getNonMedTopSellers(token)
+                val response = repository.getNonMedTopSellers("Bearer " + userDataStore.userToken)
                 _nonMedicineTopSellersResponse.value = response.handle()
             } catch (e: Exception) {
                 _nonMedicineTopSellersResponse.value = NetworkResult.Error("Medicine Not Found.")

@@ -1,11 +1,9 @@
 package com.example.pharmacyapp.ui.fragment.profile.purchase
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.pharmacyapp.data.Repository
+import com.example.pharmacyapp.data.UserDataStore
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
 import com.example.pharmacyapp.util.NetworkResult
 import com.example.pharmacyapp.util.handle
@@ -26,15 +24,23 @@ class PurchaseViewModel @Inject constructor(
         get() = _productPurchaseResponse
 
     fun getProduct() = viewModelScope.launch {
-        getProductSafeCall(1)
+        getProductSafeCall()
     }
 
-    private suspend fun getProductSafeCall(categoryId: Int) {
-        val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
+    private lateinit var userDataStore: UserDataStore
+
+    fun getToken() = viewModelScope.launch {
+        userDataStore = repository.readUserData()
+    }
+
+    private suspend fun getProductSafeCall() {
         _productPurchaseResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.getMedsInCategory(token, categoryId)
+                val response = repository.getAllMedicineInPresc(
+                    "Bearer " + userDataStore.userToken,
+                    1
+                )
                 _productPurchaseResponse.value = response.handle()
             } catch (e: Exception) {
                 _productPurchaseResponse.value = NetworkResult.Error("Medicine Not Found.")

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.pharmacyapp.data.Repository
+import com.example.pharmacyapp.data.UserDataStore
 import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
 import com.example.pharmacyapp.util.NetworkResult
@@ -29,12 +30,18 @@ class MedicineShowViewModel @Inject constructor(
         getMedicinesSafeCall()
     }
 
+    private lateinit var userDataStore: UserDataStore
+
+    fun getToken() = viewModelScope.launch {
+        userDataStore = repository.readUserData()
+    }
+
     private suspend fun getMedicinesSafeCall() {
         val token = "Bearer 3|eEYvFhVhellWYPrK7mIkVT6kp20QOdY2c3iCcOEP"
         _medicineResponse.value = NetworkResult.Loading()
         if (hasInternetConnection(getApplication())) {
             try {
-                val response = repository.getAllMedicines(token)
+                val response = repository.getAllMedicines("Bearer " + userDataStore.userToken)
                 _medicineResponse.value = response.handle()
             } catch (e: Exception) {
                 _medicineResponse.value = NetworkResult.Error("Medicine Not Found.")

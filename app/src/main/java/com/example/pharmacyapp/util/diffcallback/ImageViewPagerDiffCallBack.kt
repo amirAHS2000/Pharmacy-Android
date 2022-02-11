@@ -11,5 +11,4 @@ class ImageViewPagerDiffCallback : DiffUtil.ItemCallback<Photo>() {
     override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
         return oldItem == newItem
     }
-
 }

@@ -6,8 +6,11 @@ import com.example.pharmacyapp.model.category.GetAllCategoryResponse
 import com.example.pharmacyapp.model.category.GetMedicinesInCategoryResponse
 import com.example.pharmacyapp.model.medicine.GetAllMedicinesResponse
 import com.example.pharmacyapp.model.medicine.GetMedicineResponse
+import com.example.pharmacyapp.model.prescription.CreatePrescriptionResponse
+import com.example.pharmacyapp.model.prescription.PrescriptionContentResponse
 import com.example.pharmacyapp.model.user.UserInformationResponse
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -16,7 +19,6 @@ class Repository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val dataStore: DataStoreRepository
 ) {
-    //    val remote = remoteDataSource // TODO remove this
 
     //----------------------------------------PREPARE------------------------------------------------//
     suspend fun findUserByPhone(phone: String, nationalNumber: String): Response<UserResponse> {
@@ -62,12 +64,24 @@ class Repository @Inject constructor(
 
     }
 
+    suspend fun createPrescription(
+        token: String,
+        doctorName: String,
+        patientId: Int
+    ): Response<CreatePrescriptionResponse> {
+        return remoteDataSource.createPrescription(token, doctorName, patientId)
+    }
+
     suspend fun resetPassword(id: Int, password: String): Response<UserResponse> {
         return remoteDataSource.resetPassword(id, password)
     }
 
     suspend fun saveUserLocally(id: Int, token: String): Boolean {
         return dataStore.saveUserData(id, token)
+    }
+
+    suspend fun readUserData(): UserDataStore {
+        return dataStore.readUserData()
     }
 
     //----------------------------------------PREPARE------------------------------------------------//
@@ -116,6 +130,22 @@ class Repository @Inject constructor(
         token: String
     ): Response<UserInformationResponse> {
         return remoteDataSource.getUserInfo(token)
+    }
+
+    suspend fun addPrescriptionContent(
+        token: String,
+        prescId: Int,
+        medId: Int,
+        insBuy: Boolean
+    ): Response<PrescriptionContentResponse> {
+        return remoteDataSource.addPrescriptionContent(token, prescId, medId, insBuy)
+    }
+
+    suspend fun getAllMedicineInPresc(
+        token: String,
+        prescId: Int
+    ): Response<GetMedicinesInCategoryResponse> {
+        return remoteDataSource.getAllMedicineInPresc(token, prescId)
     }
 
     //----------------------------------------PROFILE (USER INFORMATION)---------------------------------------//

@@ -23,6 +23,7 @@ class ProductFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getToken()
         viewModel.getMedicine()
     }
 
@@ -46,6 +47,10 @@ class ProductFragment : Fragment() {
 
         binding.productToolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
+        }
+
+        binding.addToCardButton.setOnClickListener {
+
         }
 
         return binding.root
